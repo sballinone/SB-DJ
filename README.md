@@ -1,4 +1,5 @@
 # SB-DJ
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4fbafd257c35452593b370dc15d4ead5)](https://app.codacy.com/manual/sballinone/SB-DJ?utm_source=github.com&utm_medium=referral&utm_content=sballinone/SB-DJ&utm_campaign=Badge_Grade_Settings)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/9d584927b27a4d9faed55b4c33deaf8d)](https://www.codacy.com/manual/sballinone/SB-DJ?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sballinone/SB-DJ&amp;utm_campaign=Badge_Grade)
 
 DJ Compagnon app
