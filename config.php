@@ -18,4 +18,4 @@ $credits = true;
 $showrelease = true; // helpful for debugging
 
 // Do not change
-$release = "2020.0.beta.3";
+$release = "2020.0.beta.4";

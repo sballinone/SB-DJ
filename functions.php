@@ -17,15 +17,14 @@ function preview($text, $limit) {
 
 function playlist($db) {
     $playlist = array();
-
     $data = $db->query("SELECT * FROM playlist ORDER BY id DESC;");
-
+    
     while($song = $data->fetch_assoc()) {
         $item = new CSong($song["id"],$song["title"],$song["artist"]);
         $item->setupForPlaylist($song["timestamp"],$song["waswish"]);
         array_push($playlist, $item);
     }
-
+    
     foreach ($playlist as $song) {
         echo $song->returnPlaylist();
     }

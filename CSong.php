@@ -43,45 +43,61 @@ class CSong {
         $return = '<div class="item';
         // Check if song was on wishlist and add class 'wish'
         if($this->waswish == true)
-            $return .= " wish";
+        $return .= " wish";
         $return .= '">';
-        $return .= '<span class="title">'.$this->title.'</span>';
-        $return .= '<span class="artist">'.$this->artist.'</span><br />';
-        $return .= '<span class="timestamp">'.date('h:i a',strtotime($this->timestamp)).'</span>';
+        $return .= '<div class="row">';
+        $return .= '<div class="col-xs-2 col-sm-2 col-md-2 col-xl-2">';
+        $return .= '<div class="box"><span class="timestamp">'.date('h:i a',strtotime($this->timestamp)).'</span></div></div>';
+        $return .= '<div class="col-xs-5 col-sm-5 col-md-5 col-xl-5">';
+        $return .= '<div class="box"><span class="title">'.$this->title.'</span></div></div>';
+        $return .= '<div class="col-xs-4 col-sm-4 col-md-4 col-xl-4">';
+        $return .= '<div class="box"><span class="artist">'.$this->artist.'</span></div></div>';
+        $return .= '<div class="col-xs-1 col-sm-1 col-md-1 col-xl-1">';
+        $return .= '<div class="box">';
         
         // Check if dj or guest
         if($_SESSION['backend']) {
             // Add remove button if dj
-            $return .= '<span class="actions">';
+            $return .= '<div class="actions">';
             $return .= "<a href='backend.php?id=".$this->id."&do=remove'><i class='icofont-delete'></i></a>";
-            $return .= '</span>';
+            $return .= '</div>';
         }
-        $return .= '</div>';
-
+        $return .= '</div></div></div></div>';
+        
         return $return;
     }
 
     function returnWishlist() {
-        $return = '<div class="item';
+        $return = '<div class="item ';
         
         // Check if song was declined or accepted and add corresponding class
-        if($song["declined"] == true) 
+        if($this->declined == true) 
             $return .= " declined";
-        if($song["accepted"] == true) 
+        if($this->accepted == true) 
             $return .= " accepted";
         
         // Check if song was your wish
-        $cookie = explode(",", $_SESSION['wishes']);
+        $cookie = explode(",", strip_tags($_SESSION['wishes']));
         if(in_array($this->id,$cookie)) {
             $return .= " yourwish";
         }
         
         $return .= '">';
-        $return .= '<span class="title">'.$this->title.'</span>';
-        $return .= '<span class="artist">'.$this->artist.'</span><br />';
-        $return .= '<span class="votes">'.$this->votes.' votes</span>';
-        $return .= '<span class="hostname">'.preview($this->hostname,15).'</span>';
-        $return .= '<span class="actions">';
+        $return .= '<div class="row">';
+        $return .= '<div class="col-xs-6 col-sm-6 col-md-6 col-xl-6">';
+        $return .= '<div class="box"><span class="title">'.$this->title.'</span></div></div>';
+        $return .= '<div class="col-xs-6 col-sm-6 col-md-6 col-xl-6">';
+        $return .= '<div class="box"><span class="artist">'.$this->artist.'</span></div></div>';
+        $return .= '</div><div class="row">';
+        $return .= '<div class="col-xs-3 col-sm-3 col-md-3 col-xl-3">';
+        $return .= '<div class="box"><span class="votes">'.$this->votes.' votes</span></div></div>';
+        $return .= '<div class="col-xs-6 col-sm-6 col-md-6 col-xl-6">';
+        $return .= '<div class="box"><span class="hostname">';
+        if($_SESSION['backend'])
+            $return .= preview($this->hostname,15);
+        $return .= '</span></div></div>';
+        $return .= '<div class="col-xs-3 col-sm-3 col-md-3 col-xl-3">';
+        $return .= '<div class="box"><div class="actions">';
         
         // Check if dj or guest
         if($_SESSION['backend']) {
@@ -100,15 +116,14 @@ class CSong {
         } else {
 
             // Check if song has been voted and add vote button
-            $cookie = explode(",",$_SESSION["votes"]);
+            $cookie = explode(",",strip_tags($_SESSION["votes"]));
             if(!in_array($this->id,$cookie)) {
                 $return .= "<a href='index.php?id=".$this->id."&do=vote'><i class='icofont-star'></i></a>";
             }
 
         }
 
-        $return .= '</span>';
-        $return .= '</div>';
+        $return .= '</div></div></div></div></div>';
 
         return $return;
     }

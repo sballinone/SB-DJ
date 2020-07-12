@@ -1,0 +1,81 @@
+/* SB DJ 
+ * Release 2020.0
+ * Written by Saskia Brückner
+ *
+ * Color sheme: https://colorhunt.co/palette/181367
+ */
+
+body {
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    font-size: 12pt;
+    line-height: 1.5;
+    background-color: #162447;
+    color: #fff;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #e43f5a;
+}
+
+h1, h2, h3 {
+    font-family: "Playfair Display", serif;
+    font-weight: 400;
+}
+
+h1 {
+    font-size: 40pt;
+}
+
+h2, h3 {
+    font-size: 25pt;
+}
+
+.item {
+    background-color: #1f4068;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+}
+
+.wish {
+    /* border-left: 5px #e43f5a solid; */
+    background-color: #40681F;
+}
+
+.title {
+    font-family: "Playfair Display", serif;
+    font-size: 15pt;
+}
+
+.artist {
+    font-size: 10pt;
+}
+
+.votes, .hostname, .timestamp {
+    font-size: 8pt;
+}
+
+.actions {
+    width: 100%;
+    text-align: right;
+}
+
+.accepted {
+    background-color: #40681F;
+}
+
+.declined {
+    background-color: #681F40;
+}
+
+/* LOGIN */
+#login-wrap {}
+#login-form {}
+
+#footer {}

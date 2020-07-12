@@ -9,25 +9,25 @@ if(isset($_GET['do'])) {
     switch(strip_tags($_GET['do'])) {
         case 'addwish':
             // Check if song already has been played
-            $sql = "SELECT title FROM playlist WHERE title LIKE '".ucwords($_POST['title'])."';";
+            $sql = "SELECT title FROM playlist WHERE title LIKE '".ucwords(strip_tags($_POST['title']))."';";
             $data = $db->query($sql);
 
             if($data->num_rows) {
-                $status->setMsg("Sorry, the song <i>".ucwords($_POST['title'])."</i> already has been played.");
+                $status->setMsg("Sorry, the song <i>".ucwords(strip_tags($_POST['title']))."</i> already has been played.");
             } else {
                 // Check if song already has been wished
-                $sql = "SELECT title FROM wishlist WHERE title LIKE '".ucwords($_POST['title'])."';";
+                $sql = "SELECT title FROM wishlist WHERE title LIKE '".ucwords(strip_tags($_POST['title']))."';";
                 $data = $db->query($sql);
 
                 if($data->num_rows) {
-                    $status->setMsg("Sorry, the song <i>".ucwords($_POST['title'])."</i> is already on the wishlist.");
+                    $status->setMsg("Sorry, the song <i>".ucwords(strip_tags($_POST['title']))."</i> is already on the wishlist.");
                 } else {
 
                     // Insert wish into wishlist
                     $sql = 'INSERT INTO wishlist VALUES (
                         NULL,
-                        "'.ucwords($_POST['title']).'",
-                        "'.ucwords($_POST['artist']).'",
+                        "'.ucwords(strip_tags($_POST['title'])).'",
+                        "'.ucwords(strip_tags($_POST['artist'])).'",
                         0,
                         0,
                         1,
@@ -35,14 +35,14 @@ if(isset($_GET['do'])) {
                     $db->query($sql);
 
                     // Set cookie and refresh session
-                    $cookie = explode(",",$_COOKIE['wishes']);
+                    $cookie = explode(",",strip_tags($_COOKIE['wishes']));
                     array_push($cookie,$db->insert_id);
                     $cookie = implode(",", $cookie);
                     setcookie("wishes",$cookie,time()+3600);
                     $_SESSION["wishes"] = $cookie;
 
                     // Output status
-                    $status->setMsg("Wish <i>".ucwords($_POST['title'])."</i> added.");
+                    $status->setMsg("Wish <i>".ucwords(strip_tags($_POST['title']))."</i> added.");
 
                 }
             }
@@ -75,7 +75,7 @@ if(isset($_GET['do'])) {
 
         case 'vote':
             // Check if already voted
-            $cookie = explode(",", $_COOKIE['votes']);
+            $cookie = explode(",", strip_tags($_COOKIE['votes']));
 
             if(in_array($_GET['id'], $cookie)) {
                 $status->setMsg("Oh no! You already voted for <i>".$votes["title"]."</i>.");
@@ -88,13 +88,13 @@ if(isset($_GET['do'])) {
                 $_SESSION['votes'] = $cookie;
                 
                 // Vote
-                $sql = "SELECT votes, title FROM wishlist WHERE id LIKE '".$_GET['id']."';";
+                $sql = "SELECT votes, title FROM wishlist WHERE id LIKE '".strip_tags($_GET['id'])."';";
                 $data = $db->query($sql);
                 $votes = $data->fetch_assoc();
                 
                 $myvote = $votes["votes"] + 1;
 
-                $sql = "UPDATE wishlist SET votes = ".$myvote." WHERE id LIKE '".$_GET['id']."';";
+                $sql = "UPDATE wishlist SET votes = ".$myvote." WHERE id LIKE '".strip_tags($_GET['id'])."';";
                 $db->query($sql);
 
                 // Output status
@@ -137,65 +137,65 @@ if(isset($_GET['do'])) {
                 // Insert song into playlist
                 $sql = 'INSERT INTO playlist VALUES (
                     NULL,
-                    "'.ucwords($_POST['title']).'",
-                    "'.ucwords($_POST['artist']).'",
+                    "'.ucwords(strip_tags($_POST['title'])).'",
+                    "'.ucwords(strip_tags($_POST['artist'])).'",
                     NULL,
                     0)';
                 $db->query($sql);
 
                 // Output status
-                $status->setMsg("Song <i>".ucwords($_POST['title'])."</i> added.");
+                $status->setMsg("Song <i>".ucwords(strip_tags($_POST['title']))."</i> added.");
             }
         break;
 
         case 'remove':
             if($_SESSION['backend']) {
                 // Remove song from playlist
-                $sql = "DELETE FROM playlist WHERE id LIKE '".$_GET['id']."';";
+                $sql = "DELETE FROM playlist WHERE id LIKE '".strip_tags($_GET['id'])."';";
                 $db->query($sql);
 
                 // Output status
-                $status->setMsg("Song #".$_GET['id']." removed.");
+                $status->setMsg("Song #".strip_tags($_GET['id'])." removed.");
             }
         break;
 
         case 'removewish':
             if($_SESSION['backend']) {
                 // Remove song from wishlist
-                $sql = "DELETE FROM wishlist WHERE id LIKE '".$_GET['id']."';";
+                $sql = "DELETE FROM wishlist WHERE id LIKE '".strip_tags($_GET['id'])."';";
                 $db->query($sql);
 
                 // Output status
-                $status->setMsg("Wish #".$_GET['id']." removed.");
+                $status->setMsg("Wish #".strip_tags($_GET['id'])." removed.");
             }
         break;
 
         case 'accept':
             if($_SESSION['backend']) {
                 // Accept song on wishlist
-                $sql = "UPDATE wishlist SET accepted = true WHERE id LIKE '".$_GET['id']."';";
+                $sql = "UPDATE wishlist SET accepted = true WHERE id LIKE '".strip_tags($_GET['id'])."';";
                 $db->query($sql);
 
                 // Output status
-                $status->setMsg("Song #".$_GET['id']." accepted.");
+                $status->setMsg("Song #".strip_tags($_GET['id'])." accepted.");
             }
         break;
 
         case 'decline':
             if($_SESSION['backend']) {
                 // Decline song on wishlist
-                $sql = "UPDATE wishlist SET declined = true WHERE id LIKE '".$_GET['id']."';";
+                $sql = "UPDATE wishlist SET declined = true WHERE id LIKE '".strip_tags($_GET['id'])."';";
                 $db->query($sql);
 
                 // Output status
-                $status->setMsg("Song #".$_GET['id']." declined.");
+                $status->setMsg("Song #".strip_tags($_GET['id'])." declined.");
             }
         break;
 
         case 'play':
             if($_SESSION['backend']) {
                 // Move song from wishlist to playlist
-                $sql = "SELECT * FROM wishlist WHERE id LIKE '".$_GET['id']."';";
+                $sql = "SELECT * FROM wishlist WHERE id LIKE '".strip_tags($_GET['id'])."';";
                 $data = $db->query($sql);
                 $song = $data->fetch_assoc();
 
@@ -207,7 +207,7 @@ if(isset($_GET['do'])) {
                     1)';
                 $db->query($sql);
 
-                $sql = "DELETE FROM wishlist WHERE id LIKE '".$_GET['id']."';";
+                $sql = "DELETE FROM wishlist WHERE id LIKE '".strip_tags($_GET['id'])."';";
                 $db->query($sql);
 
                 // Output status

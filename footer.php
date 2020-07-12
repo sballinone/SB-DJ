@@ -1,4 +1,4 @@
-<div id='footer'>
+<div class='row' id='footer'>
 
     <?php
 

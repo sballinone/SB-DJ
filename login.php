@@ -17,11 +17,15 @@ if(isset($_POST['pwd'])) {
 
 ?>
 
+<!DOCTYPE html>
 <html>
 <head>
     <title>SB DJ</title>
-    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="css/fonts.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/flexboxgrid.min.css" type="text/css">
     <link rel="stylesheet" href="icofont/icofont.min.css" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
