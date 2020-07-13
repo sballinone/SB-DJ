@@ -23,22 +23,24 @@ if(isset($_POST['pwd'])) {
     <title>SB DJ</title>
     <link rel="stylesheet" href="css/fonts.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="stylesheet" href="css/flexboxgrid.min.css" type="text/css">
-    <link rel="stylesheet" href="icofont/icofont.min.css" type="text/css">
+    <link rel="stylesheet" href="external/flexboxgrid.min.css" type="text/css">
+    <link rel="stylesheet" href="external/icofont/icofont.min.css" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
 <div id="login-wrap">
-    <div id="login-form">
+   <div id="login-form">
         <form action="login.php" method="POST">
-            <input type="password" placeholder="Password" name="pwd"><br />
+            <input type="password" placeholder="Password" name="pwd">&nbsp;&nbsp;&nbsp;
             <input type="submit" value="login">
         </form>
     </div>
 </div>
 
-<?php include("footer.php"); ?>
+<div id="login-footer">
+    <?php include("footer.php"); ?>
+</div>
 
 </body>
 </html>

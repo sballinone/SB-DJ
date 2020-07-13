@@ -9,7 +9,7 @@ class CSong {
     // Song md3 tags
     private $id;
     private $title;
-    private $song;
+    private $artist;
 
     // Playlist tags
     private $timestamp;
@@ -59,7 +59,7 @@ class CSong {
         if($_SESSION['backend']) {
             // Add remove button if dj
             $return .= '<div class="actions">';
-            $return .= "<a href='backend.php?id=".$this->id."&do=remove'><i class='icofont-delete'></i></a>";
+            $return .= "<a href='backend.php?id=".$this->id."&do=remove' class='removeFromPlaylist'><i class='icofont-delete'></i></a>";
             $return .= '</div>';
         }
         $return .= '</div></div></div></div>';
@@ -67,7 +67,7 @@ class CSong {
         return $return;
     }
 
-    function returnWishlist() {
+    function returnWishlist($latestwish) {
         $return = '<div class="item ';
         
         // Check if song was declined or accepted and add corresponding class
@@ -75,11 +75,10 @@ class CSong {
             $return .= " declined";
         if($this->accepted == true) 
             $return .= " accepted";
-        
-        // Check if song was your wish
-        $cookie = explode(",", strip_tags($_SESSION['wishes']));
-        if(in_array($this->id,$cookie)) {
-            $return .= " yourwish";
+
+        // Check if song is latest wish
+        if($this->id == $latestwish) {
+            $return .= " latestwish";
         }
         
         $return .= '">';
@@ -98,27 +97,35 @@ class CSong {
         $return .= '</span></div></div>';
         $return .= '<div class="col-xs-3 col-sm-3 col-md-3 col-xl-3">';
         $return .= '<div class="box"><div class="actions">';
-        
+
         // Check if dj or guest
         if($_SESSION['backend']) {
 
             // Check if song has been declined or accepted
             if($this->declined != true && $this->accepted != true) {
-                $return .= "<a href='backend.php?id=".$this->id."&do=accept'><i class='icofont-check-circled'></i></a>";
-                $return .= "<a href='backend.php?id=".$this->id."&do=decline'><i class='icofont-close-circled'></i></a>";
+                $return .= "<a href='backend.php?id=".$this->id."&do=accept' class='accept'><i class='icofont-check-circled'></i></a>";
+                $return .= "<a href='backend.php?id=".$this->id."&do=decline' class='decline'><i class='icofont-close-circled'></i></a>";
                 $return .= "<a href='backend.php?id=".$this->id."&do=removewish'><i class='icofont-minus-circle'></i></a>";
             }
 
             // If song has been accepted, add MoveToPlaylist button
             if($this->accepted == true)
-                $return .= "<a href='backend.php?id=".$this->id."&do=play'><i class='icofont-play-alt-2'></i></a>";
+                $return .= "<a href='backend.php?id=".$this->id."&do=play' class='play'><i class='icofont-play-alt-2'></i></a>";
 
         } else {
 
-            // Check if song has been voted and add vote button
-            $cookie = explode(",",strip_tags($_SESSION["votes"]));
-            if(!in_array($this->id,$cookie)) {
-                $return .= "<a href='index.php?id=".$this->id."&do=vote'><i class='icofont-star'></i></a>";
+            // Check if song was your wish
+            $cookie = explode(",", strip_tags($_SESSION['wishes']));
+            if(in_array($this->id,$cookie)) {
+                $return .= "<i class='icofont-heart yourwish'></i>";
+            } else {
+
+                // Check if song has been voted and add vote button
+                $cookie = explode(",",strip_tags($_SESSION["votes"]));
+                if(!in_array($this->id,$cookie) && !$this->declined) {
+                    $return .= "<a href='index.php?id=".$this->id."&do=vote' class='vote'><i class='icofont-star'></i></a>";
+                }
+            
             }
 
         }

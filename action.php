@@ -40,6 +40,8 @@ if(isset($_GET['do'])) {
                     $cookie = implode(",", $cookie);
                     setcookie("wishes",$cookie,time()+3600);
                     $_SESSION["wishes"] = $cookie;
+                    
+                    $latestwish = $db->insert_id;
 
                     // Output status
                     $status->setMsg("Wish <i>".ucwords(strip_tags($_POST['title']))."</i> added.");
@@ -49,28 +51,32 @@ if(isset($_GET['do'])) {
         break;
 
         case 'export':
-            // Select the songs to export
-            $sql = "SELECT * FROM playlist ORDER BY id DESC;";
-            $data = $db->query($sql);
+            // Check if export is allowed or if dj
+            if($_SESSION['backend'] || $export) {
 
-            // Check if dj or guest and set filename
-            if($_SESSION['backend']) {
-                $filename = "export.csv";
-            } else {
-                $filename = "export_cust.csv";
+                // Select the songs to export
+                $sql = "SELECT * FROM playlist ORDER BY id DESC;";
+                $data = $db->query($sql);
+
+                // Check if dj or guest and set filename
+                if($_SESSION['backend']) {
+                    $filename = "export.csv";
+                } else {
+                    $filename = "export_cust.csv";
+                }
+
+                // Write CSV file
+                $txt = fopen($filename,"w");
+                fwrite($txt,'Timestamp,Artist,Title,From Wishlist'.PHP_EOL);
+                while($song = $data->fetch_assoc()) {
+                    $csvline = date('d.m.Y h:i a', strtotime($song["timestamp"])).','.$song["artist"].','.$song["title"].','.$song["waswish"].PHP_EOL;
+                    fwrite($txt,$csvline);
+                }
+                fclose($txt);
+
+                // Output status
+                $status->setMsg("Playlist successfully exported. <a href='export.csv' target='_blank'>Open CSV</a>");
             }
-
-            // Write CSV file
-            $txt = fopen($filename,"w");
-            fwrite($txt,'Timestamp,Artist,Title,From Wishlist'.PHP_EOL);
-            while($song = $data->fetch_assoc()) {
-                $csvline = date('d.m.Y h:i a', strtotime($song["timestamp"])).','.$song["artist"].','.$song["title"].','.$song["waswish"].PHP_EOL;
-                fwrite($txt,$csvline);
-            }
-            fclose($txt);
-
-            // Output status
-            $status->setMsg("Playlist successfully exported. <a href='export.csv' target='_blank'>Open CSV</a>");
         break;
 
         case 'vote':
@@ -216,4 +222,3 @@ if(isset($_GET['do'])) {
         break;
     }
 }
-?>

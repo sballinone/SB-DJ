@@ -30,10 +30,10 @@ function playlist($db) {
     }
 }
 
-function wishlist($db) {
+function wishlist($db, $latestwish) {
     $wishlist = array();
 
-    $data = $db->query("SELECT * FROM wishlist ORDER BY declined, votes;");
+    $data = $db->query("SELECT * FROM wishlist ORDER BY accepted DESC, declined, votes DESC;");
     
     while($song = $data->fetch_assoc()) {
         $item = new CSong($song["id"],$song["title"],$song["artist"]);
@@ -42,6 +42,6 @@ function wishlist($db) {
     }
     
     foreach ($wishlist as $song) {
-        echo $song->returnWishlist();
+        echo $song->returnWishlist($latestwish);
     }
 }

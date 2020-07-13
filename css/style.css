@@ -17,14 +17,19 @@ body {
 a {
     color: #fff;
     text-decoration: none;
-    font-weight: bold;
+    background-color: #1f4068;
+    padding: 5px 10px;
+    margin: 0 5px 0 0;
+    border-radius: 10px;
 }
 
 a:hover {
-    color: #e43f5a;
+    background-color: #e43f5a;
 }
 
-h1, h2, h3 {
+h1, 
+h2, 
+h3 {
     font-family: "Playfair Display", serif;
     font-weight: 400;
 }
@@ -39,12 +44,17 @@ h2, h3 {
 
 .item {
     background-color: #1f4068;
-    margin-bottom: 5px;
+    margin: 0 -5px 5px -5px;
     padding: 5px 10px;
+    border-radius: 10px;
+    vertical-align: middle;
+}
+
+.item .box {
+    line-height: 200%;
 }
 
 .wish {
-    /* border-left: 5px #e43f5a solid; */
     background-color: #40681F;
 }
 
@@ -57,7 +67,9 @@ h2, h3 {
     font-size: 10pt;
 }
 
-.votes, .hostname, .timestamp {
+.votes, 
+.hostname, 
+.timestamp {
     font-size: 8pt;
 }
 
@@ -66,16 +78,187 @@ h2, h3 {
     text-align: right;
 }
 
-.accepted {
+.btnRefresh,
+.btnDefault,
+.btnDanger,
+.removeFromPlaylist {
+    background-color: #1f4068;
+    padding: 5px 10px;
+    margin: 0 5px 0 0;
+    font-size: 12pt;
+    border-radius: 5px;
+}
+
+.btnRefresh:hover,
+.play:hover,
+.wish .removeFromPlaylist:hover,
+.accept:hover {
+    background-color: #66864B;
+}
+
+.btnDefault:hover,
+.removeFromPlaylist:hover {
+    background-color: #4B6686;
+}
+
+.btnDanger:hover,
+.decline:hover {
+    background-color: #864B66;
+}
+
+.btnRefresh {
     background-color: #40681F;
+}
+
+.btnDanger {
+    background-color: #681F40;
+}
+
+.accepted,
+.play,
+.wish .removeFromPlaylist,
+.accepted .vote {
+    background-color: #40681F;
+}
+
+.accepted .vote:hover {
+    background-color: #e43f5a;
 }
 
 .declined {
     background-color: #681F40;
 }
 
-/* LOGIN */
-#login-wrap {}
-#login-form {}
+.latestwish {
+    background-color: #1f4068;
+    animation: latestwish 1s;
+}
 
-#footer {}
+@keyframes latestwish {
+    from { 
+        background-color: #e43f5a; 
+    }
+    to { 
+        background-color: #1f4068; 
+    }
+}
+
+.yourwish {
+    color: #e43f5a;
+    background-color: #1f4068;
+    padding: 5px 10px;
+    margin: 0 5px 0 0;
+    border-radius: 10px;
+}
+
+#msg {
+    color: #fff;
+    text-decoration: none;
+    background-color: #1f4068;
+    padding: 5px 10px;
+    margin: 10px 0 0 0;
+    border-radius: 10px;
+}
+
+#msg i {
+    font-family: "Playfair Display", serif;
+    font-style: normal;
+    color: #d0d3da;
+}
+
+#msg i::before {
+    content: " « ";
+    color: #d0d3da;
+}
+
+#msg i::after {
+    content: " » ";
+    color: #d0d3da;
+}
+
+#header a {
+    color: #fff;
+    font-weight: 300;
+}
+
+#header a:hover {
+    color: #fff;
+    font-weight: 300;
+}
+
+#footer .box,
+#header .box,
+.content {
+    margin: 0;
+    padding: 15px 25px;
+}
+
+#footer small {
+    margin: 0 5px 0 0;
+    font-size: 8pt;
+    line-height: 2.7;
+}
+
+form input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    background-color: #4B6686;
+    border-radius: 10px;
+    border: 0;
+    font-size: 12pt;
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    padding: 5px 10px;
+    color: #fff;
+    outline: none;
+    margin: 0 0 0 -5px;
+}
+
+form .formText {
+    width: calc(100% - 10px);
+}
+
+form .formSubmit {
+    font-weight: bold;
+}
+
+form .item {
+    margin-bottom: 10px;
+}
+
+::placeholder,
+:-ms-input-placeholder,
+::-ms-input-placeholder {
+    color: #fff;
+}
+
+#login-wrap {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    vertical-align: middle;
+}
+
+#login-form {
+        position: absolute;
+        width: 250px;
+        height: 30px;
+        text-align: center;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        
+        max-width: 100%;
+        max-height: 100%;
+        overflow: auto;
+}
+
+#login-footer {
+    position: absolute;
+    bottom: 10px; 
+    left: 10px;
+}

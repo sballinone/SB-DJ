@@ -1,12 +1,14 @@
 # SB-DJ
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/eb42bfbe2d00489fa2c3507a141dc483)](https://www.codacy.com/manual/sballinone/SB-DJ?utm_source=github.com&utm_medium=referral&utm_content=sballinone/SB-DJ&utm_campaign=Badge_Grade)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sballinone/SB-DJ/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sballinone/SB-DJ/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/sballinone/SB-DJ/badges/build.png?b=master)](https://scrutinizer-ci.com/g/sballinone/SB-DJ/build-status/master)
 
 DJ Compagnon app
 
 This app is meant to help you as a DJ to prepare your next events setlist and to provide a wishlist for your guests.
 
-Current release: 2020.0.beta.4
+Current final: 2020.0
+Current beta:  2020.1.beta.1
 
 ## Features
 
@@ -20,6 +22,8 @@ Current release: 2020.0.beta.4
     -   Let your clients upvote wishes
     -   Accept or decline songs
     -   Move songs to playlist
+-   QR Code Flyer
+    -   Create and print a QR Code Flyer for your guests
 -   Security
     -   Secure your backend
     -   Prevent double-votes
@@ -27,21 +31,14 @@ Current release: 2020.0.beta.4
 ## Roadmap
 
 **NEXT RELEASE** 
-2020.0
-
--   User interface - The UI still needs some improvement.
-
-**FUTURE RELEASES**
 
 2020.1
 
--   QR Code - Print a qr-code that your guests can easily reach your wishlist
-
-2020.2
-
 -   Setlist - Prepare your setlist for your next event
 
-2020.3
+**FUTURE RELEASES**
+
+2020.2
 
 -   New-event-assistant - Easily setup your new event
 -   Setup assistant - Setup your database easily
@@ -62,5 +59,6 @@ For this software we used some open source projects:
 -   IcoFont - <https://icofont.com>
 -   Google Webfonts - <https://fonts.google.com>
 -   Google Webfont Helper - <https://google-webfonts-helper.herokuapp.com/fonts>
+-   goQR.com QR Code Generator - <https://goqr.me/api/>
 
 Thank you to the open source community.
