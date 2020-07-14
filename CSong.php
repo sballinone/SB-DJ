@@ -27,19 +27,19 @@ class CSong {
         $this->artist = $artist;
     }
 
-    function setupForPlaylist($timestamp, $waswish) {
+    public function setupForPlaylist($timestamp, $waswish) {
         $this->timestamp = $timestamp;
         $this->waswish = $waswish;
     }
 
-    function setupForWishlist($accepted,$declined,$votes,$hostname) {
+    public function setupForWishlist($accepted,$declined,$votes,$hostname) {
         $this->accepted = $accepted;
         $this->declined = $declined;
         $this->votes = $votes;
         $this->hostname = $hostname;
     }
 
-    function returnPlaylist() {
+    public function returnPlaylist() {
         $return = '<div class="item';
         // Check if song was on wishlist and add class 'wish'
         if($this->waswish == true)
@@ -67,7 +67,7 @@ class CSong {
         return $return;
     }
 
-    function returnWishlist($latestwish) {
+    public function returnWishlist($latestwish) {
         $return = '<div class="item ';
         
         // Check if song was declined or accepted and add corresponding class

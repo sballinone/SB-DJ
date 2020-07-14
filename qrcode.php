@@ -44,7 +44,6 @@ $qrapi .= urlencode($uri);
                     ?>
                 </div>
             </div>
-            <?php include("footer.php"); ?>
         </div>
     <?php } ?>
 </div>

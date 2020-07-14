@@ -12,11 +12,11 @@ class CMsg {
         $this->msg = "";
     }
     
-    function setMsg($msg) {
+    public function setMsg($msg) {
         $this->msg .= $msg;
     }
 
-    function printMsg() {
+    public function printMsg() {
         return $this->msg;
     }
 }

@@ -59,6 +59,7 @@ if(isset($_GET['do'])) {
                 $data = $db->query($sql);
 
                 // Check if dj or guest and set filename
+                $filename;
                 if($_SESSION['backend']) {
                     $filename = "export.csv";
                 } else {
@@ -66,13 +67,13 @@ if(isset($_GET['do'])) {
                 }
 
                 // Write CSV file
-                $txt = fopen($filename,"w");
+                $txt = fopen(/** @scrutinizer ignore-type */ $filename,"w");
                 fwrite($txt,'Timestamp,Artist,Title,From Wishlist'.PHP_EOL);
                 while($song = $data->fetch_assoc()) {
                     $csvline = date('d.m.Y h:i a', strtotime($song["timestamp"])).','.$song["artist"].','.$song["title"].','.$song["waswish"].PHP_EOL;
                     fwrite($txt,$csvline);
                 }
-                fclose($txt);
+                fclose(/** @scrutinizer ignore-type */$txt);
 
                 // Output status
                 $status->setMsg("Playlist successfully exported. <a href='export.csv' target='_blank'>Open CSV</a>");

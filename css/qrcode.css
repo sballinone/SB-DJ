@@ -12,21 +12,10 @@ h3 {
     float: left;
     border: 1px #1f4068 dotted;
     width: 340px;
-    max-height: 420px;
+    height: 425px;
     overflow: hidden;
 }
 
 .qrcode {
     text-align: center;
-}
-
-#footer {
-    margin-top: -25px;
-}
-
-#footer a {
-    background-color: #fff;
-    margin: 0;
-    padding: 0;
-    color: #1f4068;
 }
