@@ -7,7 +7,7 @@
 
 DJ Compagnon app
 
-![Mockup](external/Mockup.png)
+![Mockup](external/mockup.png)
 
 **WISHLIST** Are you tired of guests interupting you with their wishes? As your Co-DJ, SB DJ allowes your guests sending their wishes without interupting you.
 

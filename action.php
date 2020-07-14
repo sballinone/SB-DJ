@@ -67,8 +67,8 @@ if(isset($_GET['do'])) {
                 }
 
                 // Write CSV file
-                $txt = fopen(/** @scrutinizer ignore-type */ $filename,"w");
-                fwrite($txt,'Timestamp,Artist,Title,From Wishlist'.PHP_EOL);
+                $txt = fopen($filename,"w");
+                fwrite(/** @scrutinizer ignore-type */ $txt,'Timestamp,Artist,Title,From Wishlist'.PHP_EOL);
                 while($song = $data->fetch_assoc()) {
                     $csvline = date('d.m.Y h:i a', strtotime($song["timestamp"])).','.$song["artist"].','.$song["title"].','.$song["waswish"].PHP_EOL;
                     fwrite($txt,$csvline);
