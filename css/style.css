@@ -117,7 +117,8 @@ h2, h3 {
 .accepted,
 .play,
 .wish .removeFromPlaylist,
-.accepted .vote {
+.accepted .vote,
+.played {
     background-color: #40681F;
 }
 
@@ -132,6 +133,13 @@ h2, h3 {
 .latestwish {
     background-color: #1f4068;
     animation: latestwish 1s;
+}
+
+.setlist {
+    background-color: #162447;
+    border-color: #1f4068;
+    border-style: solid;
+    border-width: 0 3px;
 }
 
 @keyframes latestwish {

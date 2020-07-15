@@ -2,12 +2,14 @@
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sballinone/SB-DJ/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sballinone/SB-DJ/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/sballinone/SB-DJ/badges/build.png?b=master)](https://scrutinizer-ci.com/g/sballinone/SB-DJ/build-status/master)
-[![Release](https://badgen.net/badge/release/2020.0/cyan)](https://github.com/sballinone/SB-DJ/releases/)
-[![Dev](https://badgen.net/badge/dev/2020.1.alpha/orange)](https://github.com/sballinone/SB-DJ/releases/)
+[![Release](https://badgen.net/badge/release/2020.0.2/cyan)](https://github.com/sballinone/SB-DJ/releases/)
+[![Dev](https://badgen.net/badge/dev/2020.1.beta/orange)](https://github.com/sballinone/SB-DJ/releases/)
 
 DJ Compagnon app
 
 ![Mockup](external/mockup.png)
+
+**SETLIST** Create your setlist and enjoy full playlist integration
 
 **WISHLIST** Are you tired of guests interupting you with their wishes? As your Co-DJ, SB DJ allowes your guests sending their wishes without interupting you.
 

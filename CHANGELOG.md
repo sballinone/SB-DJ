@@ -2,6 +2,28 @@
 
 * * *
 
+| Mayor | Minor | Build  |
+| ----- | ----- | ------ |
+| 2020  | 1     | beta.1 |
+
+> **NEW**
+>
+> -   Added Setlist feature
+
+> **FIXES**
+
+> **ENHANCEMENTS**
+>
+> -   Code quality improvements
+> -   UI improvements
+> -   Added security layer for resets
+
+> **NEW CLASSES**
+
+> **COMMENTS**
+
+* * *
+
 | Mayor | Minor | Build |
 | ----- | ----- | ----- |
 | 2020  | 0     | 1     |

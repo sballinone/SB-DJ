@@ -15,7 +15,7 @@ function preview($text, $limit) {
     return $text;
 }
 
-function playlist($db) {
+function playlist($db, $showDeleteIcon = true, $latest = false) {
     $playlist = array();
     $data = $db->query("SELECT * FROM playlist ORDER BY id DESC;");
     
@@ -26,7 +26,7 @@ function playlist($db) {
     }
     
     foreach ($playlist as $song) {
-        echo $song->returnPlaylist();
+        echo $song->returnPlaylist($showDeleteIcon, $latest);
     }
 }
 
@@ -44,4 +44,24 @@ function wishlist($db, $latestwish) {
     foreach ($wishlist as $song) {
         echo $song->returnWishlist($latestwish);
     }
+}
+
+function setlist($db, $limit = false) {
+    
+    $setlist = array();
+    if(!$limit) {
+        $data = $db->query("SELECT * FROM setlist ORDER BY sort DESC;");
+    } else {
+        $data = $db->query("SELECT * FROM setlist WHERE played LIKE '0' ORDER BY sort ASC LIMIT 1;");
+    }
+    
+    while($song = $data->fetch_assoc()) {
+        $item = new CSong($song["id"],$song["title"],$song["artist"]);
+        $item->setupForSetlist($song["comment"],$song["sort"],$song["played"]);
+        array_push($setlist, $item);
+    }
+    
+    foreach ($setlist as $song) {
+        echo $song->returnSetlist($limit);
+   }
 }
