@@ -196,6 +196,8 @@ if(isset($_GET['do'])) {
                     0)';
                 $db->query($sql);
 
+                $latest = $db->insert_id;
+
                 // Output status
                 $status->setMsg($output['actionPHPadd']);
             }
@@ -220,6 +222,17 @@ if(isset($_GET['do'])) {
 
                 // Output status
                 $status->setMsg($output['actionPHPremove']);
+            }
+        break;
+
+        case 'removefromset':
+            if($_SESSION['backend']) {
+                // Remove song from setlist
+                $sql = "DELETE FROM setlist WHERE id LIKE '".strip_tags($_GET['id'])."';";
+                $db->query($sql);
+
+                // Output status
+                $status->setMsg("Song #".strip_tags($_GET['id'])." removed.");
             }
         break;
 
@@ -270,6 +283,8 @@ if(isset($_GET['do'])) {
                     NULL,
                     1)';
                 $db->query($sql);
+
+                $latest = $db->insert_id;
 
                 $sql = "DELETE FROM wishlist WHERE id LIKE '".strip_tags($_GET['id'])."';";
                 $db->query($sql);
@@ -368,6 +383,59 @@ if(isset($_GET['do'])) {
 
                 // Output status
                 $status->setMsg($output['actionPHPmovetosetSuccess']);
+            }
+        break;
+
+        case 'playfromset':
+            if($_SESSION['backend']) {
+                // Move song from wishlist to playlist
+                $sql = "SELECT * FROM setlist WHERE id LIKE '".strip_tags($_GET['id'])."';";
+                $data = $db->query($sql);
+                $song = $data->fetch_assoc();
+
+                $sql = 'INSERT INTO playlist VALUES(
+                    NULL,
+                    "'.$song["title"].'",
+                    "'.$song["artist"].'",
+                    NULL,
+                    0)';
+                $db->query($sql);
+                
+                $latest = $db->insert_id;
+
+                $sql = "UPDATE setlist SET played = 1 WHERE id LIKE '".strip_tags($_GET['id'])."';";
+                $db->query($sql);
+
+
+                // Output status
+                $status->setMsg("Song <i>".$song['title']."</i> copied to playlist.");
+            }
+        break;
+
+        case 'addsetlist':
+            // Check if song already has been added
+            $sql = "SELECT title FROM setlist WHERE title LIKE '".ucwords(strip_tags($_POST['title']))."';";
+            $data = $db->query($sql);
+
+            if($data->num_rows) {
+                $status->setMsg("Sorry, the song <i>".ucwords(strip_tags($_POST['title']))."</i> is already on the setlist.");
+            } else {
+                // Insert song into setlist
+                $sql = 'INSERT INTO setlist VALUES (
+                    NULL,
+                    "'.ucwords(strip_tags($_POST['title'])).'",
+                    "'.ucwords(strip_tags($_POST['artist'])).'",
+                    0,
+                    0,
+                    "'.strip_tags($_POST['comment']).'");';
+                $db->query($sql);
+                $sort = $db->insert_id;
+            
+                $sql = "UPDATE setlist SET sort = ".$sort." WHERE id LIKE '".$sort."';";
+                $db->query($sql);
+
+                // Output status
+                $status->setMsg("Song <i>".ucwords(strip_tags($_POST['title']))."</i> added.");
             }
         break;
 

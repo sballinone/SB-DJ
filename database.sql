@@ -28,12 +28,18 @@ CREATE TABLE `wishlist` (
 ALTER TABLE `playlist`
   ADD PRIMARY KEY (`id`);
 
+ALTER TABLE `setlist`
+  ADD PRIMARY KEY (`id`);
+
 ALTER TABLE `wishlist`
   ADD PRIMARY KEY (`id`);
 
 
 ALTER TABLE `playlist`
   MODIFY `id` int(9) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `setlist`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `wishlist`
   MODIFY `id` int(9) NOT NULL AUTO_INCREMENT;

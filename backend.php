@@ -18,6 +18,7 @@ include("functions.php");
 
 $status = new CMsg();
 $latestwish;
+$latest;
 
 $db = new mysqli($dbhost, $dbuser, $dbpass, $dbbase, $dbport);
 
@@ -72,7 +73,7 @@ require_once "action.php";
                     <form action="backend.php?do=add" method="Post">
                         <div class="item">
                             <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6 col-xl-6">
+                                <div class="col-xs-2 col-sm-2 col-md-2 col-xl-2">
                                     <div class="box">
                                         <input type="text" placeholder="<?=$output['title'];?>" name="title" class="formText">
                                     </div>
@@ -95,7 +96,8 @@ require_once "action.php";
                 </div>
 
                 <?php
-                playlist($db);
+                setlist($db,1);
+                playlist($db, true, $latest);
                 ?>
             </div>
         </div>

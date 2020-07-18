@@ -21,6 +21,11 @@ class CSong {
     private $votes;
     private $hostname;
 
+    // Setlist tags
+    private $comment;
+    private $sort;
+    private $played;
+
     function __construct($id, $title, $artist) {
         $this->id = $id;
         $this->title = $title;
@@ -39,11 +44,22 @@ class CSong {
         $this->hostname = $hostname;
     }
 
-    public function returnPlaylist() {
+    public function setupForSetlist($comment, $sort, $played) {
+        $this->comment = $comment;
+        $this->sort = $sort;
+        $this->played = $played;
+    }
+
+    public function returnPlaylist($showDeleteIcon = true, $latest = false) {
+
         $return = '<div class="item';
         // Check if song was on wishlist and add class 'wish'
-        if($this->waswish == true)
-        $return .= " wish";
+        if($this->waswish == true) {
+            $return .= " wish";
+        }
+        if($this->id == $latest) {
+            $return .= " latestwish";
+        }
         $return .= '">';
         $return .= '<div class="row">';
         $return .= '<div class="col-xs-2 col-sm-2 col-md-2 col-xl-2">';
@@ -56,7 +72,7 @@ class CSong {
         $return .= '<div class="box">';
         
         // Check if dj or guest
-        if($_SESSION['backend']) {
+        if($_SESSION['backend'] && $showDeleteIcon) {
             // Add remove button if dj
             $return .= '<div class="actions">';
             $return .= "<a href='backend.php?id=".$this->id."&do=remove' class='removeFromPlaylist'><i class='icofont-delete'></i></a>";
