@@ -108,9 +108,11 @@ class CSong {
                 $return .= "<a href='backend.php?id=".$this->id."&do=removewish'><i class='icofont-minus-circle'></i></a>";
             }
 
-            // If song has been accepted, add MoveToPlaylist button
-            if($this->accepted == true)
+            // If song has been accepted, add setlist and MoveToPlaylist button
+            if($this->accepted == true) {
+                $return .= "<a href='setlist.php?id=".$this->id."&do=moveToSet' class='play'><i class='icofont-disc'></i></a>";
                 $return .= "<a href='backend.php?id=".$this->id."&do=play' class='play'><i class='icofont-play-alt-2'></i></a>";
+            }
 
         } else {
 
@@ -132,6 +134,50 @@ class CSong {
 
         $return .= '</div></div></div></div></div>';
 
+        return $return;
+    }
+
+    public function returnSetlist($limit = false) {
+        $return = '<div class="item';
+        
+        // Check if song has played state and add class 'played'
+        if($this->played == true)
+            $return .= " played";
+        
+        if($limit) 
+            $return .= " setlist";
+        
+        $return .= '">';
+        $return .= '<div class="row">';
+
+        if(!$limit) {
+            $return .= '<div class="col-xs-1 col-sm-1 col-md-1 col-xl-1">';
+            $return .= '<div class="box"><span class="timestamp">Song '.$this->sort.'</span></div></div>';
+            $return .= '<div class="col-xs-4 col-sm-4 col-md-4 col-xl-4">';
+            $return .= '<div class="box"><span class="title">'.$this->title.'</span></div></div>';
+            $return .= '<div class="col-xs-4 col-sm-4 col-md-4 col-xl-4">';
+        } else {
+            $return .= '<div class="col-xs-2 col-sm-2 col-md-2 col-xl-2">';
+            $return .= '<div class="box"><span class="timestamp">NEXT</span></div></div>';
+            $return .= '<div class="col-xs-5 col-sm-5 col-md-5 col-xl-5">';
+            $return .= '<div class="box"><span class="title">'.$this->title.'</span></div></div>';
+            $return .= '<div class="col-xs-2 col-sm-2 col-md-2 col-xl-2">';
+        }
+        $return .= '<div class="box"><span class="artist">'.$this->artist.'</span></div></div>';
+        $return .= '<div class="col-xs-3 col-sm-3 col-md-3 col-xl-3">';
+        $return .= '<div class="box">';
+        
+        $return .= '<div class="actions">';
+            $return .= "<a href='backend.php?id=".$this->id."&do=playfromset'><i class='icofont-play-alt-2'></i></a>";
+
+            if(!$limit) {
+                $return .= "<a href='setlist.php?id=".$this->sort."&do=movedown'><i class='icofont-curved-down'></i></a>";
+                $return .= "<a href='setlist.php?id=".$this->sort."&do=moveup'><i class='icofont-curved-up'></i></a>";
+                $return .= "<a href='setlist.php?id=".$this->id."&do=removefromset'><i class='icofont-delete'></i></a>";
+            }
+        $return .= '</div>';
+        $return .= '</div></div></div></div>';
+        
         return $return;
     }
 }

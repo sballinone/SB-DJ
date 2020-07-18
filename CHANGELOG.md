@@ -4,6 +4,53 @@
 
 | Mayor | Minor | Build |
 | ----- | ----- | ----- |
+| 2020  | 1     | 0     |
+
+> **NEW**
+>
+> -   Move from Wishlist to Setlist
+>     Now you can ask your guests before your event for wishes
+> -   Implemented multilanguage ability.
+> -   Translated into German, Spanish and English.
+> -   Added setup assistant
+> -   Cookie Consent (optional)
+
+> **FIXES**
+
+> **ENHANCEMENTS**
+>
+> -   Setlist improvements
+
+> **NEW CLASSES**
+
+> **COMMENTS**
+
+* * *
+
+| Mayor | Minor | Build  |
+| ----- | ----- | ------ |
+| 2020  | 1     | beta.1 |
+
+> **NEW**
+>
+> -   Added Setlist feature
+
+> **FIXES**
+
+> **ENHANCEMENTS**
+>
+> -   Code quality improvements
+> -   UI improvements
+> -   Added security layer for resets
+
+> **NEW CLASSES**
+
+> **COMMENTS**
+
+* * *
+
+| Mayor | Minor | Build |
+| ----- | ----- | ----- |
 | 2020  | 0     | 1     |
 
 > **NEW**

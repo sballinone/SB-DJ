@@ -12,6 +12,24 @@
         if($showrelease)
             echo "<small><a href='https://github.com/sballinone/SB-DJ' target='_blank'><i class='icofont-github'></i></a> v".$release."</small>";
         
+        if($showlang) {
+            echo "<small>";
+            $data = scandir("./lang");
+
+            foreach($data as $language) {
+                if($language != "." && $language != "..") {
+                    
+                    $langcode = substr($language,0,2);
+
+                    if($langcode == $_SESSION['lang']) echo "<strong>";
+                    
+                    echo "<a href='?lang=".$langcode."'>".ucwords($langcode)."</a>";
+                    
+                    if($langcode == $_SESSION['lang']) echo "</strong>";
+
+                }
+            }
+        }
         ?>
     
     </div>

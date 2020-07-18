@@ -4,6 +4,7 @@ session_destroy();
 session_start();
 
 include("config.php");
+include("multilanguage.php");
 
 if(isset($_POST['pwd'])) {
     if(strip_tags($_POST['pwd']) == $pwd) {
@@ -11,7 +12,7 @@ if(isset($_POST['pwd'])) {
         header("Location: backend.php");
         exit;
     } else {
-        echo "<script>alert('Sorry, the password you entered isn\'t correct.\\n\\nPlease try again.');</script>";
+        echo "<script>alert('".$output['passwordIncorrect']."');</script>";
     }
 }
 
@@ -32,8 +33,8 @@ if(isset($_POST['pwd'])) {
 <div id="login-wrap">
    <div id="login-form">
         <form action="login.php" method="POST">
-            <input type="password" placeholder="Password" name="pwd">&nbsp;&nbsp;&nbsp;
-            <input type="submit" value="login">
+            <input type="password" placeholder="<?=$output['password'];?>" name="pwd">&nbsp;&nbsp;&nbsp;
+            <input type="submit" value="<?=$output['login'];?>">
         </form>
     </div>
 </div>

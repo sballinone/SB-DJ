@@ -2,7 +2,14 @@
 
 session_start();
 
+if(!file_exists("config.php")) {
+    header("Location: setup.php");
+    exit;
+}
+
 include("config.php");
+include("multilanguage.php");
+
 include("CMsg.php");
 include("CSong.php");
 
@@ -38,11 +45,11 @@ require_once "action.php";
             <h1><?=$event;?></h1>
 
             <div id="btn">
-                <a href='index.php' class='btnRefresh'><i class="icofont-refresh"></i> <small>Refresh</small></a>
-                <a href='#playlist' class='btnDefault'><i class="icofont-sound-wave"></i> <small>Playlist</small></a>
+                <a href='index.php' class='btnRefresh'><i class="icofont-refresh"></i> <small><?=$output['refresh'];?></small></a>
+                <a href='#playlist' class='btnDefault'><i class="icofont-sound-wave"></i> <small><?=$output['playlist'];?></small></a>
                 <?php
                 if($export) { 
-                    echo "<a href='index.php?do=export' class='btnDefault'><i class='icofont-external-link'></i> <small>Export</small></a>";
+                    echo "<a href='index.php?do=export' class='btnDefault'><i class='icofont-external-link'></i> <small>".$output['export']."</small></a>";
                 }
                 ?>
             </div>
@@ -56,7 +63,7 @@ require_once "action.php";
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <div class="box content">
-                <h2>Wishlist</h2>
+                <h2><?=$output['wishlist'];?></h2>
                 
                 <div class="newitem">
                     <form action="index.php?do=addwish" method="Post">
@@ -64,12 +71,12 @@ require_once "action.php";
                             <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-xl-6">
                                     <div class="box">
-                                        <input type="text" placeholder="Title" name="title" class="formText">
+                                        <input type="text" placeholder="<?=$output['title'];?>" name="title" class="formText">
                                     </div>
                                 </div>
                                 <div class="col-xs-5 col-sm-5 col-md-5 col-xl-5">
                                     <div class="box">
-                                        <input type="text" placeholder="Artist" name="artist" class="formText">
+                                        <input type="text" placeholder="<?=$output['artist'];?>" name="artist" class="formText">
                                     </div>
                                 </div>
                                 <div class="col-xs-1 col-sm-1 col-md-1 col-xl-1">
@@ -92,7 +99,7 @@ require_once "action.php";
 
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <div class="box content">
-                <h2>Playlist<a name="playlist" style="visibility: hidden"></a></h2>
+                <h2><?=$output['playlist'];?><a name="playlist" style="visibility: hidden"></a></h2>
 
                 <?php
                 playlist($db);
@@ -102,7 +109,14 @@ require_once "action.php";
     </div>
 </div>
 
-<?php include("footer.php"); ?>
+<?php 
+
+include("footer.php"); 
+
+if(!strip_tags($_COOKIE['allowCookies']) && $cookieconsent) {
+    echo '<div id="cookieconsent" class="latestwish">'.$output["cookieconsent"].' <a href="index.php?do=allowcookies">'.$output["allow"].'</a></div>';
+}
+?>
 
 </body>
 </html>    

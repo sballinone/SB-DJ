@@ -2,7 +2,7 @@
 // Your login password
 $pwd = "";
 
-// The name of your event. Do NOT use "
+// The name of your event. Do NOT use the character "
 $event = "SB DJ";
 
 // The text on the QR Code Flyer
@@ -37,15 +37,22 @@ $dbhost = "localhost";
 $dbuser = "sbdj";
 $dbpass = "sbdj";
 $dbbase = "sbdj";
-$dbport = 8889;
+$dbport = 3306; //8889
+
+// Language settings
+$defaultLang = "en";
+$showlang = true;
 
 // Footer configuration
 $footernav = true;
 $credits = true;
-$showrelease = true; // helpful for debugging
+$showrelease = false; // helpful for debugging
 
 // Allow or prohibit export
 $export = true;
 
+// Do you want to activate the EU cookie consent?
+$cookieconsent = false;
+
 // Do not change
-$release = "2020.0";
+$release = "2020.1.0";

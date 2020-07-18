@@ -6,6 +6,14 @@ CREATE TABLE `playlist` (
   `waswish` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `setlist` (
+  `id` int(11) NOT NULL,
+  `title` varchar(50) NOT NULL,
+  `artist` varchar(50) NOT NULL,
+  `sort` int(11) NOT NULL,
+  `played` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE `wishlist` (
   `id` int(9) NOT NULL,
   `title` varchar(50) NOT NULL,

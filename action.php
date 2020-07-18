@@ -8,45 +8,49 @@
 if(isset($_GET['do'])) {
     switch(strip_tags($_GET['do'])) {
         case 'addwish':
-            // Check if song already has been played
-            $sql = "SELECT title FROM playlist WHERE title LIKE '".ucwords(strip_tags($_POST['title']))."';";
-            $data = $db->query($sql);
-
-            if($data->num_rows) {
-                $status->setMsg("Sorry, the song <i>".ucwords(strip_tags($_POST['title']))."</i> already has been played.");
-            } else {
-                // Check if song already has been wished
-                $sql = "SELECT title FROM wishlist WHERE title LIKE '".ucwords(strip_tags($_POST['title']))."';";
+            if(strip_tags($_COOKIE['allowCookies']) || !$cookieconsent) {
+                // Check if song already has been played
+                $sql = "SELECT title FROM playlist WHERE title LIKE '".ucwords(strip_tags($_POST['title']))."';";
                 $data = $db->query($sql);
 
                 if($data->num_rows) {
-                    $status->setMsg("Sorry, the song <i>".ucwords(strip_tags($_POST['title']))."</i> is already on the wishlist.");
+                    $status->setMsg($output["actionPHPaddWishAlreadyPlayed"]);
                 } else {
+                    // Check if song already has been wished
+                    $sql = "SELECT title FROM wishlist WHERE title LIKE '".ucwords(strip_tags($_POST['title']))."';";
+                    $data = $db->query($sql);
 
-                    // Insert wish into wishlist
-                    $sql = 'INSERT INTO wishlist VALUES (
-                        NULL,
-                        "'.ucwords(strip_tags($_POST['title'])).'",
-                        "'.ucwords(strip_tags($_POST['artist'])).'",
-                        0,
-                        0,
-                        1,
-                        "'.gethostname().'");';
-                    $db->query($sql);
+                    if($data->num_rows) {
+                        $status->setMsg($output["actionPHPaddWishAlreadyOnWishlist"]);
+                    } else {
 
-                    // Set cookie and refresh session
-                    $cookie = explode(",",strip_tags($_COOKIE['wishes']));
-                    array_push($cookie,$db->insert_id);
-                    $cookie = implode(",", $cookie);
-                    setcookie("wishes",$cookie,time()+3600);
-                    $_SESSION["wishes"] = $cookie;
-                    
-                    $latestwish = $db->insert_id;
+                        // Insert wish into wishlist
+                        $sql = 'INSERT INTO wishlist VALUES (
+                            NULL,
+                            "'.ucwords(strip_tags($_POST['title'])).'",
+                            "'.ucwords(strip_tags($_POST['artist'])).'",
+                            0,
+                            0,
+                            1,
+                            "'.gethostname().'");';
+                        $db->query($sql);
 
-                    // Output status
-                    $status->setMsg("Wish <i>".ucwords(strip_tags($_POST['title']))."</i> added.");
+                        // Set cookie and refresh session
+                        $cookie = explode(",",strip_tags($_COOKIE['wishes']));
+                        array_push($cookie,$db->insert_id);
+                        $cookie = implode(",", $cookie);
+                        setcookie("wishes",$cookie,time()+3600);
+                        $_SESSION["wishes"] = $cookie;
+                        
+                        $latestwish = $db->insert_id;
 
+                        // Output status
+                        $status->setMsg($output["actionPHPaddWishSuccess"]);
+
+                    }
                 }
+            } else {
+                $status->setMsg($output["actionPHPcookieIssue"]);
             }
         break;
 
@@ -71,71 +75,113 @@ if(isset($_GET['do'])) {
                 fwrite(/** @scrutinizer ignore-type */ $txt,'Timestamp,Artist,Title,From Wishlist'.PHP_EOL);
                 while($song = $data->fetch_assoc()) {
                     $csvline = date('d.m.Y h:i a', strtotime($song["timestamp"])).','.$song["artist"].','.$song["title"].','.$song["waswish"].PHP_EOL;
-                    fwrite($txt,$csvline);
+                    fwrite(/** @scrutinizer ignore-type */ $txt,$csvline);
                 }
                 fclose(/** @scrutinizer ignore-type */$txt);
 
                 // Output status
-                $status->setMsg("Playlist successfully exported. <a href='export.csv' target='_blank'>Open CSV</a>");
+                $status->setMsg($output["actionPHPexportSuccess"]);
             }
         break;
 
         case 'vote':
-            // Check if already voted
-            $cookie = explode(",", strip_tags($_COOKIE['votes']));
+            if(strip_tags($_COOKIE['allowCookies']) || !$cookieconsent) {
+                // Check if already voted
+                $cookie = explode(",", strip_tags($_COOKIE['votes']));
 
-            if(in_array($_GET['id'], $cookie)) {
-                $status->setMsg("Oh no! You already voted for <i>".$votes["title"]."</i>.");
+                if(in_array($_GET['id'], $cookie)) {
+                    $status->setMsg($output["actionPHPvoteDublicate"]);
+                } else {
+                    // Prevent double-vote
+                    // Session prevents one-pageload-delay in output
+                    array_push($cookie,$_GET['id']);
+                    $cookie = implode(",", $cookie);
+                    setcookie('votes', $cookie, time() + 3600);
+                    $_SESSION['votes'] = $cookie;
+                    
+                    // Vote
+                    $sql = "SELECT votes, title FROM wishlist WHERE id LIKE '".strip_tags($_GET['id'])."';";
+                    $data = $db->query($sql);
+                    $votes = $data->fetch_assoc();
+                    
+                    $myvote = $votes["votes"] + 1;
+
+                    $sql = "UPDATE wishlist SET votes = ".$myvote." WHERE id LIKE '".strip_tags($_GET['id'])."';";
+                    $db->query($sql);
+
+                    // Output status
+                    $status->setMsg($output["actionPHPvoteSuccess"]);
+                }
             } else {
-                // Prevent double-vote
-                // Session prevents one-pageload-delay in output
-                array_push($cookie,$_GET['id']);
-                $cookie = implode(",", $cookie);
-                setcookie('votes', $cookie, time() + 3600);
-                $_SESSION['votes'] = $cookie;
-                
-                // Vote
-                $sql = "SELECT votes, title FROM wishlist WHERE id LIKE '".strip_tags($_GET['id'])."';";
-                $data = $db->query($sql);
-                $votes = $data->fetch_assoc();
-                
-                $myvote = $votes["votes"] + 1;
-
-                $sql = "UPDATE wishlist SET votes = ".$myvote." WHERE id LIKE '".strip_tags($_GET['id'])."';";
-                $db->query($sql);
-
-                // Output status
-                $status->setMsg("Yeah! You voted for <i>".$votes["title"]."</i>.");
+                $status->setMsg($output["actionPHPcookieIssue"]);
             }
+        break;
+
+        case 'allowcookies':
+            setcookie('allowCookies', true, time() + 3600);
+            header('Location: index.php');
         break;
 
         // Restricted actions
         case 'resetwishlist':
             if($_SESSION['backend']) {
-                // Delete song from wishlist
-                $db->query("DELETE FROM wishlist;");
+                if(!isset($_GET['confirm'])) {
+                    $status->setMsg($output["actionPHPresetWishlist"]);
+                    $status->setMsg("<a href='backend.php?do=resetwishlist&confirm=true' class='btnRefresh'>".$output['yes']."</a>");
+                    $status->setMsg("<a href='backend.php' class='btnDanger'>".$output['no']."</a>");
+                } else {
+                    // Delete song from wishlist
+                    $db->query("DELETE FROM wishlist;");
 
-                // Output status
-                $status->setMsg("Wishlist reset successful.");
+                    // Output status
+                    $status->setMsg($output["actionPHPresetWishlistSuccess"]);
+                }
+            }
+        break;
+
+        case 'resetsetlist':
+            if($_SESSION['backend']) {
+                if(!isset($_GET['confirm'])) {
+                    $status->setMsg($output["actionPHPresetSetlist"]);
+                    $status->setMsg("<a href='setlist.php?do=resetsetlist&confirm=true' class='btnRefresh'>".$output['yes']."</a>");
+                    $status->setMsg("<a href='setlist.php' class='btnDanger'>".$output['no']."</a>");
+                } else {
+                    // Delete song from wishlist
+                    $db->query("DELETE FROM setlist;");
+
+                    $db->query("ALTER TABLE setlist AUTO_INCREMENT = 1");
+
+                    // Output status
+                    $status->setMsg($output["actionPHPresetSetlistSuccess"]);
+                }
             }
         break;
 
         case 'reset':
             if($_SESSION['backend']) {
-                // Empty playlist and wishlist
-                $db->query("DELETE FROM playlist;");
-                $db->query("DELETE FROM wishlist;");
+                if(!isset($_GET['confirm'])) {
+                    $status->setMsg($output['actionPHPreset']);
+                    $status->setMsg("<a href='backend.php?do=reset&confirm=true' class='btnRefresh'>".$output['yes']."</a>");
+                    $status->setMsg("<a href='backend.php' class='btnDanger'>".$output['no']."</a>");
+                } else {
+                    // Empty playlist and wishlist
+                    $db->query("DELETE FROM playlist;");
+                    $db->query("DELETE FROM wishlist;");
 
-                // Reset song counter / mysql primary key
-                $db->query("ALTER TABLE playlist AUTO_INCREMENT = 1");
-                $db->query("ALTER TABLE wishlist AUTO_INCREMENT = 1");
-                
-                // Remove export files
-                unlink("export.csv");
-                unlink("export_cust.csv");
-                
-                // Output status
-                $status->setMsg("Reset successful.");
+                    // Reset play state on setlist
+                    $db->query("UPDATE setlist SET played = false");
+
+                    // Reset song counter / mysql primary key
+                    $db->query("ALTER TABLE playlist AUTO_INCREMENT = 1");
+                    $db->query("ALTER TABLE wishlist AUTO_INCREMENT = 1");
+                    
+                    // Remove export files
+                    unlink("export.csv");
+                    unlink("export_cust.csv");
+                    
+                    // Output status
+                    $status->setMsg($output['actionPHPresetSuccess']);
+                }
             }
         break;
 
@@ -151,7 +197,7 @@ if(isset($_GET['do'])) {
                 $db->query($sql);
 
                 // Output status
-                $status->setMsg("Song <i>".ucwords(strip_tags($_POST['title']))."</i> added.");
+                $status->setMsg($output['actionPHPadd']);
             }
         break;
 
@@ -162,7 +208,18 @@ if(isset($_GET['do'])) {
                 $db->query($sql);
 
                 // Output status
-                $status->setMsg("Song #".strip_tags($_GET['id'])." removed.");
+                $status->setMsg($output['actionPHPremove']);
+            }
+        break;
+
+        case 'removefromset':
+            if($_SESSION['backend']) {
+                // Remove song from setlist
+                $sql = "DELETE FROM setlist WHERE id LIKE '".strip_tags($_GET['id'])."';";
+                $db->query($sql);
+
+                // Output status
+                $status->setMsg($output['actionPHPremove']);
             }
         break;
 
@@ -173,7 +230,7 @@ if(isset($_GET['do'])) {
                 $db->query($sql);
 
                 // Output status
-                $status->setMsg("Wish #".strip_tags($_GET['id'])." removed.");
+                $status->setMsg($output['actionPHPremove']);
             }
         break;
 
@@ -184,7 +241,7 @@ if(isset($_GET['do'])) {
                 $db->query($sql);
 
                 // Output status
-                $status->setMsg("Song #".strip_tags($_GET['id'])." accepted.");
+                $status->setMsg($output['actionPHPaccept']);
             }
         break;
 
@@ -195,7 +252,7 @@ if(isset($_GET['do'])) {
                 $db->query($sql);
 
                 // Output status
-                $status->setMsg("Song #".strip_tags($_GET['id'])." declined.");
+                $status->setMsg($output['actionPHPdeclined']);
             }
         break;
 
@@ -218,8 +275,126 @@ if(isset($_GET['do'])) {
                 $db->query($sql);
 
                 // Output status
-                $status->setMsg("Song <i>".$song['title']."</i> moved to playlist.");
+                $status->setMsg($output['actionPHPplay']);
             }
+        break;
+
+        case 'playfromset':
+            if($_SESSION['backend']) {
+                // Move song from wishlist to playlist
+                $sql = "SELECT * FROM setlist WHERE id LIKE '".strip_tags($_GET['id'])."';";
+                $data = $db->query($sql);
+                $song = $data->fetch_assoc();
+
+                $sql = 'INSERT INTO playlist VALUES(
+                    NULL,
+                    "'.$song["title"].'",
+                    "'.$song["artist"].'",
+                    NULL,
+                    0)';
+                $db->query($sql);
+                
+                $latest = $db->insert_id;
+
+                $sql = "UPDATE setlist SET played = 1 WHERE id LIKE '".strip_tags($_GET['id'])."';";
+                $db->query($sql);
+
+
+                // Output status
+                $status->setMsg($output['actionPHPplayFromSet']);
+            }
+        break;
+
+        case 'addsetlist':
+            // Add new song to setlist
+            // Check if song already has been added
+            $sql = "SELECT title FROM setlist WHERE title LIKE '".ucwords(strip_tags($_POST['title']))."';";
+            $data = $db->query($sql);
+
+            if($data->num_rows) {
+                $status->setMsg($output["actionPHPaddsetlistAlreadyOnSetlist"]);
+            } else {
+                // Insert song into setlist
+                $sql = 'INSERT INTO setlist VALUES (
+                    NULL,
+                    "'.ucwords(strip_tags($_POST['title'])).'",
+                    "'.ucwords(strip_tags($_POST['artist'])).'",
+                    0,
+                    0);';
+                $db->query($sql);
+                $sort = $db->insert_id;
+            
+                $sql = "UPDATE setlist SET sort = ".$sort." WHERE id LIKE '".$sort."';";
+                $db->query($sql);
+
+                // Output status
+                $status->setMsg($output['actionPHPaddsetlist']);
+            }
+        break;
+
+        case 'moveToSet':
+            // Move song from wishlist to setlist
+            // Check if song already has been added
+            $sql = "SELECT setlist.title FROM setlist JOIN wishlist ON wishlist.title = setlist.title WHERE wishlist.id = ".strip_tags($_GET['id']).";";
+            $data = $db->query($sql);
+            
+            if($data->num_rows) {
+                $song = $data->fetch_assoc();
+                $status->setMsg($output['actionPHPmovetoset']);
+                $status->setMsg("<a href='setlist.php?do=removewish&id=".strip_tags($_GET['id'])."'>".$output['yes']."</a>");
+            } else { 
+                // Receive md3 Tags from wishlist song
+                $sql = 'SELECT * FROM wishlist WHERE id = '.strip_tags($_GET['id']).';';
+                $data = $db->query($sql);
+
+                $song = $data->fetch_assoc();
+
+                // Insert song into setlist
+                $sql = 'INSERT INTO setlist VALUES (
+                    NULL,
+                    "'.$song["title"].'",
+                    "'.$song["artist"].'",
+                    0,
+                    0);';
+                $db->query($sql);
+                $sort = $db->insert_id;
+            
+                $sql = "UPDATE setlist SET sort = ".$sort." WHERE id LIKE '".$sort."';";
+                $db->query($sql);
+
+                // Remove song from wishlist
+                $sql = "DELETE FROM wishlist WHERE id LIKE '".strip_tags($_GET['id'])."';";
+                $db->query($sql);
+
+                // Output status
+                $status->setMsg($output['actionPHPmovetosetSuccess']);
+            }
+        break;
+
+        case 'moveup': 
+            // Move song one item upwards
+            $sort = strip_tags($_GET['id']);
+            $data = $db->query("SELECT * FROM setlist WHERE sort LIKE '".($sort + 1)."';");
+            $count = $data->num_rows;
+            
+            if($count) {
+                $db->query("UPDATE setlist SET sort = 99999 WHERE sort LIKE '".($sort + 1)."';");
+                $db->query("UPDATE setlist SET sort = ".($sort + 1)." WHERE sort LIKE '".($sort)."';");
+                $db->query("UPDATE setlist SET sort = ".$sort." WHERE sort LIKE '99999';");
+            } 
+        break;
+
+        case 'movedown': 
+            // Move song one item upwards
+            $sort = strip_tags($_GET['id']);
+            $data = $db->query("SELECT * FROM setlist WHERE sort LIKE '".($sort - 1)."';");
+            $count = $data->num_rows;
+
+            if($count) {
+                $db->query("UPDATE setlist SET sort = 99999 WHERE sort LIKE '".($sort - 1)."';");
+                $db->query("UPDATE setlist SET sort = ".($sort - 1)." WHERE sort LIKE '".($sort)."';");
+                $db->query("UPDATE setlist SET sort = ".$sort." WHERE sort LIKE '99999';");
+            } 
         break;
     }
 }

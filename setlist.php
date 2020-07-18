@@ -46,13 +46,8 @@ require_once "action.php";
             <h1><?=$event;?></h1>
 
             <div class="btn">
-                <a href='backend.php' class='btnRefresh'><i class="icofont-refresh"></i> <small><?=$output['refresh'];?></small></a>
-                <a href='backend.php?do=resetwishlist' class='btnDanger'><i class="icofont-ui-rate-remove"></i></a>
-                <a href='backend.php?do=reset' class='btnDanger'><i class="icofont-database-remove"></i></a>
-                <a href='setlist.php' class='btnDefault'><i class='icofont-disc'></i> <small><?=$output['setlist'];?></small></a>
-                <a href='backend.php?do=export' class='btnDefault'><i class="icofont-external-link"></i> <small><?=$output['export'];?></small></a>
-                <a href='qrcode.php' class='btnDefault' target='_blank'><i class="icofont-qr-code"> <small><?=$output['qrflyer'];?></small></i></a>
-                <a href='setup.php' class='btnDefault'><i class="icofont-settings-alt"></i></a>
+                <a href='backend.php' class='btnRefresh'><i class="icofont-play-pause"></i> <small><?=$output['back'];?></small></a>
+                <a href='setlist.php?do=resetsetlist' class='btnDanger'><i class="icofont-ui-delete"></i></a>
                 <a href='login.php' class='btnDefault'><i class="icofont-logout"></i></a>
             </div>
 
@@ -66,20 +61,30 @@ require_once "action.php";
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <div class="box content">
 
-                <h2><?=$output['playlist'];?></h2>
+                <h2><?=$output['setlist'];?></h2>
                 
                 <div class="newitem">
-                    <form action="backend.php?do=add" method="Post">
+                    <form action="setlist.php?do=addsetlist" method="Post">
                         <div class="item">
                             <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6 col-xl-6">
+                                <div class="col-xs-1 col-sm-1 col-md-1 col-xl-1">
+                                    <div class="box">
+                                        &nbsp;
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-xl-4">
                                     <div class="box">
                                         <input type="text" placeholder="<?=$output['title'];?>" name="title" class="formText">
                                     </div>
                                 </div>
-                                <div class="col-xs-5 col-sm-5 col-md-5 col-xl-5">
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-xl-4">
                                     <div class="box">
                                         <input type="text" placeholder="<?=$output['artist'];?>" name="artist" class="formText">
+                                    </div>
+                                </div>
+                                <div class="col-xs-2 col-sm-2 col-md-2 col-xl-2">
+                                    <div class="box">
+                                        &nbsp;
                                     </div>
                                 </div>
                                 <div class="col-xs-1 col-sm-1 col-md-1 col-xl-1">
@@ -95,44 +100,20 @@ require_once "action.php";
                 </div>
 
                 <?php
-                playlist($db);
+                setlist($db);
                 ?>
             </div>
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <div class="box content">
+
                 <h2><?=$output['wishlist'];?></h2>
 
-                <div class="newitem">
-                    <form action="backend.php?do=addwish" method="Post">
-                        <div class="item">
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6 col-xl-6">
-                                    <div class="box">
-                                        <input type="text" placeholder="<?=$output['title'];?>" name="title" class="formText">
-                                    </div>
-                                </div>
-                                <div class="col-xs-5 col-sm-5 col-md-5 col-xl-5">
-                                    <div class="box">
-                                        <input type="text" placeholder="<?=$output['artist'];?>" name="artist" class="formText">
-                                    </div>
-                                </div>
-                                <div class="col-xs-1 col-sm-1 col-md-1 col-xl-1">
-                                    <div class="box">
-                                        <div class="actions">
-                                            <input type="submit" value="+" class="formSubmit">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
                 <?php
-                wishlist($db, $latestwish);
+                wishlist($db, 0);
                 ?>
+
             </div>
         </div>
     </div>
