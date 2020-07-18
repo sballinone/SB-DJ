@@ -48,4 +48,4 @@ $showrelease = true; // helpful for debugging
 $export = true;
 
 // Do not change
-$release = "2020.0";
+$release = "2020.1.beta.1";

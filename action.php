@@ -112,30 +112,63 @@ if(isset($_GET['do'])) {
         // Restricted actions
         case 'resetwishlist':
             if($_SESSION['backend']) {
-                // Delete song from wishlist
-                $db->query("DELETE FROM wishlist;");
+                if(!isset($_GET['confirm'])) {
+                    $status->setMsg("Reset wishlist? ");
+                    $status->setMsg("<a href='backend.php?do=resetwishlist&confirm=true' class='btnRefresh'>Yes</a>");
+                    $status->setMsg("<a href='backend.php' class='btnDanger'>No</a>");
+                } else {
+                    // Delete song from wishlist
+                    $db->query("DELETE FROM wishlist;");
 
-                // Output status
-                $status->setMsg("Wishlist reset successful.");
+                    // Output status
+                    $status->setMsg("Wishlist reset successful.");
+                }
+            }
+        break;
+
+        case 'resetsetlist':
+            if($_SESSION['backend']) {
+                if(!isset($_GET['confirm'])) {
+                    $status->setMsg("Reset setlist? ");
+                    $status->setMsg("<a href='setlist.php?do=resetsetlist&confirm=true' class='btnRefresh'>Yes</a>");
+                    $status->setMsg("<a href='setlist.php' class='btnDanger'>No</a>");
+                } else {
+                    // Delete song from wishlist
+                    $db->query("DELETE FROM setlist;");
+
+                    $db->query("ALTER TABLE setlist AUTO_INCREMENT = 1");
+
+                    // Output status
+                    $status->setMsg("Setlist reset successful.");
+                }
             }
         break;
 
         case 'reset':
             if($_SESSION['backend']) {
-                // Empty playlist and wishlist
-                $db->query("DELETE FROM playlist;");
-                $db->query("DELETE FROM wishlist;");
+                if(!isset($_GET['confirm'])) {
+                    $status->setMsg("Reset all? This clears the wishlist and the playlist. ");
+                    $status->setMsg("<a href='backend.php?do=reset&confirm=true' class='btnRefresh'>Yes</a>");
+                    $status->setMsg("<a href='backend.php' class='btnDanger'>No</a>");
+                } else {
+                    // Empty playlist and wishlist
+                    $db->query("DELETE FROM playlist;");
+                    $db->query("DELETE FROM wishlist;");
 
-                // Reset song counter / mysql primary key
-                $db->query("ALTER TABLE playlist AUTO_INCREMENT = 1");
-                $db->query("ALTER TABLE wishlist AUTO_INCREMENT = 1");
-                
-                // Remove export files
-                unlink("export.csv");
-                unlink("export_cust.csv");
-                
-                // Output status
-                $status->setMsg("Reset successful.");
+                    // Reset play state on setlist
+                    $db->query("UPDATE setlist SET played = false");
+
+                    // Reset song counter / mysql primary key
+                    $db->query("ALTER TABLE playlist AUTO_INCREMENT = 1");
+                    $db->query("ALTER TABLE wishlist AUTO_INCREMENT = 1");
+                    
+                    // Remove export files
+                    unlink("export.csv");
+                    unlink("export_cust.csv");
+                    
+                    // Output status
+                    $status->setMsg("Reset successful.");
+                }
             }
         break;
 
@@ -150,6 +183,8 @@ if(isset($_GET['do'])) {
                     0)';
                 $db->query($sql);
 
+                $latest = $db->insert_id;
+
                 // Output status
                 $status->setMsg("Song <i>".ucwords(strip_tags($_POST['title']))."</i> added.");
             }
@@ -159,6 +194,17 @@ if(isset($_GET['do'])) {
             if($_SESSION['backend']) {
                 // Remove song from playlist
                 $sql = "DELETE FROM playlist WHERE id LIKE '".strip_tags($_GET['id'])."';";
+                $db->query($sql);
+
+                // Output status
+                $status->setMsg("Song #".strip_tags($_GET['id'])." removed.");
+            }
+        break;
+
+        case 'removefromset':
+            if($_SESSION['backend']) {
+                // Remove song from setlist
+                $sql = "DELETE FROM setlist WHERE id LIKE '".strip_tags($_GET['id'])."';";
                 $db->query($sql);
 
                 // Output status
@@ -214,12 +260,93 @@ if(isset($_GET['do'])) {
                     1)';
                 $db->query($sql);
 
+                $latest = $db->insert_id;
+
                 $sql = "DELETE FROM wishlist WHERE id LIKE '".strip_tags($_GET['id'])."';";
                 $db->query($sql);
 
                 // Output status
                 $status->setMsg("Song <i>".$song['title']."</i> moved to playlist.");
             }
+        break;
+
+        case 'playfromset':
+            if($_SESSION['backend']) {
+                // Move song from wishlist to playlist
+                $sql = "SELECT * FROM setlist WHERE id LIKE '".strip_tags($_GET['id'])."';";
+                $data = $db->query($sql);
+                $song = $data->fetch_assoc();
+
+                $sql = 'INSERT INTO playlist VALUES(
+                    NULL,
+                    "'.$song["title"].'",
+                    "'.$song["artist"].'",
+                    NULL,
+                    0)';
+                $db->query($sql);
+                
+                $latest = $db->insert_id;
+
+                $sql = "UPDATE setlist SET played = 1 WHERE id LIKE '".strip_tags($_GET['id'])."';";
+                $db->query($sql);
+
+
+                // Output status
+                $status->setMsg("Song <i>".$song['title']."</i> copied to playlist.");
+            }
+        break;
+
+        case 'addsetlist':
+            // Check if song already has been added
+            $sql = "SELECT title FROM setlist WHERE title LIKE '".ucwords(strip_tags($_POST['title']))."';";
+            $data = $db->query($sql);
+
+            if($data->num_rows) {
+                $status->setMsg("Sorry, the song <i>".ucwords(strip_tags($_POST['title']))."</i> is already on the setlist.");
+            } else {
+                // Insert song into setlist
+                $sql = 'INSERT INTO setlist VALUES (
+                    NULL,
+                    "'.ucwords(strip_tags($_POST['title'])).'",
+                    "'.ucwords(strip_tags($_POST['artist'])).'",
+                    0,
+                    0,
+                    "'.strip_tags($_POST['comment']).'");';
+                $db->query($sql);
+                $sort = $db->insert_id;
+            
+                $sql = "UPDATE setlist SET sort = ".$sort." WHERE id LIKE '".$sort."';";
+                $db->query($sql);
+
+                // Output status
+                $status->setMsg("Song <i>".ucwords(strip_tags($_POST['title']))."</i> added.");
+            }
+        break;
+
+        case 'moveup': 
+            // Move song one item upwards
+            $sort = strip_tags($_GET['id']);
+            $data = $db->query("SELECT * FROM setlist WHERE sort LIKE '".($sort + 1)."';");
+            $count = $data->num_rows;
+            
+            if($count) {
+                $db->query("UPDATE setlist SET sort = 99999 WHERE sort LIKE '".($sort + 1)."';");
+                $db->query("UPDATE setlist SET sort = ".($sort + 1)." WHERE sort LIKE '".($sort)."';");
+                $db->query("UPDATE setlist SET sort = ".$sort." WHERE sort LIKE '99999';");
+            } 
+        break;
+
+        case 'movedown': 
+            // Move song one item upwards
+            $sort = strip_tags($_GET['id']);
+            $data = $db->query("SELECT * FROM setlist WHERE sort LIKE '".($sort - 1)."';");
+            $count = $data->num_rows;
+
+            if($count) {
+                $db->query("UPDATE setlist SET sort = 99999 WHERE sort LIKE '".($sort - 1)."';");
+                $db->query("UPDATE setlist SET sort = ".($sort - 1)." WHERE sort LIKE '".($sort)."';");
+                $db->query("UPDATE setlist SET sort = ".$sort." WHERE sort LIKE '99999';");
+            } 
         break;
     }
 }
