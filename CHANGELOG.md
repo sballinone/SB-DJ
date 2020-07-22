@@ -2,21 +2,22 @@
 
 * * *
 
-| Mayor | Minor | Build  |
-| ----- | ----- | ------ |
-| 2020  | 1     | beta.1 |
+| Mayor | Minor | Build |
+| ----- | ----- | ----- |
+| 2020  | 1     | 1     |
 
 > **NEW**
 >
-> -   Added Setlist feature
+> -   Online Update Check
+>     Now you can check if an update is available in the setup.
 
 > **FIXES**
+>
+> -   Bug for customer export fixed
+> -   Workaround for the multilanguage bug added
+> -   Bug Input files fixed
 
 > **ENHANCEMENTS**
->
-> -   Code quality improvements
-> -   UI improvements
-> -   Added security layer for resets
 
 > **NEW CLASSES**
 

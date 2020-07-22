@@ -1,5 +1,5 @@
 <?php
-$release = "2020.1.0";
+$release = "2020.1.1";
 
 session_start();
 
@@ -126,17 +126,20 @@ if(!file_exists("config.php")) {
     }
 }
 
-
+// Workaround
+include("lang/".$_SESSION['lang'].".php");
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Welcome · Willkommen · Bienvenido · Bienvenue &middot; SB DJ</title>
+    
     <link rel="stylesheet" href="css/fonts.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="external/flexboxgrid.min.css" type="text/css">
     <link rel="stylesheet" href="external/icofont/icofont.min.css" type="text/css">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -153,6 +156,9 @@ if(!file_exists("config.php")) {
                 
                 <!-- DB STATUS BUTTON -->
                 <a href='#' class='btn<?=$dbstatus;?>'><i class="icofont-database"></i> <small><?=$output['setupDatabase'];?></small></a>
+                
+                <!-- UPDATE BUTTON -->
+                <a href='#' class='btnDefault' id='btnUpdate'><i class="icofont-database"></i> <small>Checking...</small></a>
             </div>
             
             <div id="msg">
@@ -412,6 +418,13 @@ $credits = true;
 $showrelease = true;
 include("footer.php"); 
 ?>
+
+<script src="https://risara.events/UPDATE/sbdj.js"></script>
+<?php
+$releasedata = explode(".", $release);
+echo "<script>var relmajor = ".$releasedata[0]."; var relminor = ".$releasedata[1]."; var relbuilt = ".$releasedata[2].";</script>";
+?>
+<script src="./js/update.js"></script>
 
 </body>
 </html>    

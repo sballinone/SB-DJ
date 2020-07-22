@@ -27,6 +27,9 @@ if($db->connect_errno) {
 }
 
 require_once "action.php";
+
+// Workaround
+include("lang/".$_SESSION['lang'].".php");
 ?>
 
 <!DOCTYPE html>
@@ -75,10 +78,15 @@ require_once "action.php";
                             <div class="row">
                                 <div class="col-xs-2 col-sm-2 col-md-2 col-xl-2">
                                     <div class="box">
-                                        <input type="text" placeholder="<?=$output['title'];?>" name="title" class="formText">
+                                        &nbsp;
                                     </div>
                                 </div>
                                 <div class="col-xs-5 col-sm-5 col-md-5 col-xl-5">
+                                    <div class="box">
+                                        <input type="text" placeholder="<?=$output['title'];?>" name="title" class="formText">
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-xl-4">
                                     <div class="box">
                                         <input type="text" placeholder="<?=$output['artist'];?>" name="artist" class="formText">
                                     </div>

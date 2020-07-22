@@ -55,4 +55,4 @@ $export = true;
 $cookieconsent = false;
 
 // Do not change
-$release = "2020.1.0";
+$release = "2020.1.1";

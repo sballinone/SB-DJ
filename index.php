@@ -25,6 +25,9 @@ if($db->connect_errno) {
 }
 
 require_once "action.php";
+
+// Workaround
+include("lang/".$_SESSION['lang'].".php");
 ?>
 
 <!DOCTYPE html>
