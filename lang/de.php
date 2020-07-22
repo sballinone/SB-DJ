@@ -37,6 +37,7 @@ $output["actionPHPaddWishSuccess"] = "Ich habe dein Wunsch <i>".ucwords(strip_ta
 $output["actionPHPcookieIssue"] = "Sorry, du musst Cookies erlauben, um diese Funktion nutzen zu können. <a href='javascript:allowcookies()'>Cookies erlauben</a>";
 $output["actionPHPdeclined"] = "Song #".strip_tags($_GET['id'])." abgelehnt.";
 $output["actionPHPexportSuccess"] = "Playliste erfolgreich exportiert. <a href='export.csv' target='_blank'>Öffne CSV</a>";
+$output["actionPHPexportSuccessCust"] = "Playliste erfolgreich exportiert. <a href='export_cust.csv' target='_blank'>Öffne CSV</a>";
 $output["actionPHPmovetoset"] = "Sorry, der Song <i>".ucwords(strip_tags($song['title']))."</i> ist bereits auf der Setliste. Wunsch löschen? ";
 $output["actionPHPmovetosetSuccess"] = "Song <i>".$song['title']."</i> verschoben.";
 $output["actionPHPplay"] = "Song <i>".$song['title']."</i> auf die Playliste verschoben.";

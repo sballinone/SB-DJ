@@ -66,8 +66,10 @@ if(isset($_GET['do'])) {
                 $filename;
                 if($_SESSION['backend']) {
                     $filename = "export.csv";
+                    $status->setMsg($output["actionPHPexportSuccess"]);
                 } else {
                     $filename = "export_cust.csv";
+                    $status->setMsg($output["actionPHPexportSuccessCust"]);
                 }
 
                 // Write CSV file
@@ -78,9 +80,6 @@ if(isset($_GET['do'])) {
                     fwrite(/** @scrutinizer ignore-type */ $txt,$csvline);
                 }
                 fclose(/** @scrutinizer ignore-type */$txt);
-
-                // Output status
-                $status->setMsg($output["actionPHPexportSuccess"]);
             }
         break;
 

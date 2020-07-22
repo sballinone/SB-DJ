@@ -37,6 +37,7 @@ $output["actionPHPaddWishSuccess"] = "I added your wish <i>".ucwords(strip_tags(
 $output["actionPHPcookieIssue"] = "Sorry, you need to allow cookies. <a href='javascript:allowcookies()'>Allow cookies</a>";
 $output["actionPHPdeclined"] = "Song #".strip_tags($_GET['id'])." declined.";
 $output["actionPHPexportSuccess"] = "Playlist successfully exported. <a href='export.csv' target='_blank'>Open CSV</a>";
+$output["actionPHPexportSuccessCust"] = "Playlist successfully exported. <a href='export_cust.csv' target='_blank'>Open CSV</a>";
 $output["actionPHPmovetoset"] = "Sorry, the song <i>".ucwords(strip_tags($song['title']))."</i> is already on the setlist. Remove wish? ";
 $output["actionPHPmovetosetSuccess"] = "Song <i>".$song['title']."</i> moved.";
 $output["actionPHPplay"] = "Song <i>".$song['title']."</i> moved to playlist.";

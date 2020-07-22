@@ -37,6 +37,7 @@ $output["actionPHPaddWishSuccess"] = "Yo he añadido la canción <i>".ucwords(st
 $output["actionPHPcookieIssue"] = "Lo siento, tienes que permitir cookies para usar esta funcción. <a href='javascript:allowcookies()'>Permitir cookies</a>";
 $output["actionPHPdeclined"] = "Canción #".strip_tags($_GET['id'])." rechazado.";
 $output["actionPHPexportSuccess"] = "La lista de reproducción se ha exportada con éxito. <a href='export.csv' target='_blank'>Abra CSV</a>";
+$output["actionPHPexportSuccessCust"] = "La lista de reproducción se ha exportada con éxito. <a href='export_cust.csv' target='_blank'>Abra CSV</a>";
 $output["actionPHPmovetoset"] = "Lo siento, la canción <i>".ucwords(strip_tags($song['title']))."</i> ya está en la lista. ¿Quieres borrarla de la lista de deseos? ";
 $output["actionPHPmovetosetSuccess"] = "Canción <i>".$song['title']."</i> pospuesto.";
 $output["actionPHPplay"] = "Canción <i>".$song['title']."</i> pospuesto a la lista de reproducción.";
