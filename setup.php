@@ -40,7 +40,7 @@ if (isset($_GET['do'])) {
     $export = strip_tags($_POST['export']);
     $cookieconsent = strip_tags($_POST['cookieconsent']);
 
-    $file = fopen("config.php","w");
+    $file = fopen("config.php", "w");
     fwrite(/** @scrutinizer ignore-type */ $file, "<?php ".PHP_EOL);
     fwrite(/** @scrutinizer ignore-type */ $file, "// Automatically created by SB DJ ".PHP_EOL);
     fwrite(/** @scrutinizer ignore-type */ $file, "// ".date('d.m.Y H:i').PHP_EOL);

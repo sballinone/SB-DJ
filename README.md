@@ -40,9 +40,50 @@ See [CHANGELOG.md](CHANGELOG.md)
 
 ## Installation
 
--   Upload your files onto your webserver, import database.sql into your mysql database and open SB DJ in your webbrowser. Your webbrowser should redirect you to setup.php.
--   If you have enabled shortcuts, you find the buttons "FE" and "BE" on the bottom. Press "BE" to enter the DJ interface of the software. 
--   If you have disabled shortcuts, open backend.php to view the backend.
+We recommend using git to install SB DJ. This makes it very easy to update SB DJ.
+
+1.  Go to the directory, where you plan to run SB DJ in.
+2.  Initialize and clone the repository: 
+
+    ```
+    git init
+    git clone https://github.com/sballinone/SB-DJ.git
+    ```
+
+_Note: git clone creates a subdirectory called "SB-DJ". You may clone your repository to the parent level and symlink your htdocs to SB-DJ._
+
+3.  Create a database and inport database.sql
+    
+    ```
+    mysql -u <username> -p <database> < database.sql
+    ```
+
+4.  Run SB-DJ in your webbrowser. It should redirect you to setup.php.
+
+### Update
+
+1.  To update SB DJ, just go into your git repository and pull the new updates.
+
+    ```
+    git pull
+    ```
+
+2.  Open SB DJ and go into the configuration (setup.php). Save the configuration to update your local config.php. This fits your config.php to the installed release.
+
+_Please note: There is always the latest release of SB DJ hosted within the repository. We host beta releases on the beta branch._
+
+### Quick Start
+
+-   Run SB DJ by opening the application in your webbrowser. 
+-   If you have enabled shortcuts, you find the buttons "FE" (Frontend) and "BE" (Backend) on the bottom. Press "BE" to enter the DJ interface of the software (Default setting).
+-   If you have disabled shortcuts and cannot see the BE button, open backend.php to view the backend.
+
+## Timezone
+
+If you import your CSV file from djay, you may encounter the timezone issue: the timetable of the playlist is shifted by a few hours. In this case, check your timezone settings in your server environment. 
+As a workaround, you may run a SQL query to update **all** playlist entries. For example, if you live in Central Europe (+2), but your server shows the hours in Greenwich (+0), you may use the following query to shift all hours two hours forward:
+
+    UPDATE playlist SET timestamp = DATE_ADD(timestamp, INTERVAL 2 HOUR)
 
 ## Translation
 
@@ -50,9 +91,13 @@ See [CHANGELOG.md](CHANGELOG.md)
 
     Example: 
 
-    English: $output["welcome"] = "Welcome ".$\_SESSION["firstname"]; 
+    English: 
 
-    German: $output["welcome"] = "Willkommen ".$\_SESSION["firstname"];
+        $output["welcome"] = "Welcome ".$\_SESSION["firstname"]; 
+
+    German: 
+
+        $output["welcome"] = "Willkommen ".$\_SESSION["firstname"];
 
 * * *
 

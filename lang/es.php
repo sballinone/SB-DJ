@@ -82,5 +82,5 @@ $output["setupWelcomeMsg"] = "¡Hola! Me alegro mucho a verte. Confígura la bas
 // upload.php
 $output["uploadFailed"] = "Perdóname, no pude subir tu archivo.";
 $output["uploadFileToLarge"] = "Perdóname, tu archivo es demasiado grande.";
-$output["uploadSuccess"] = "El archivo ". basename( $_FILES["importfile"]["name"]). " ha sido subido.";
+$output["uploadSuccess"] = "El archivo ".basename( $_FILES["importfile"]["name"])." ha sido subido.";
 $output["uploadWrongFileType"] = "Perdóname, solo están permitidos los archivos CSV de djay. ";
