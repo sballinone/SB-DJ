@@ -15,6 +15,8 @@ $output["login"] = "Anmelden";
 $output["artist"] = "Interpret";
 $output["back"] = "Zurück";
 $output["export"] = "Exportieren";
+$output["import"] = "Importieren";
+$output["importfile"] = "CSV-Datei aus djay: ";
 $output["playlist"] = "Playliste";
 $output["qrflyer"] = "QR Flyer";
 $output["refresh"] = "Neu laden";
@@ -76,3 +78,9 @@ $output["setupUpdate"] = "Speichere Konfiguration";
 $output["setupUpdated"] = "Konfiguration gespeichert";
 $output["setupWelcome"] = "Willkommen";
 $output["setupWelcomeMsg"] = "Hi! Ich freue mich, dich zu sehen. Du wirst begeistert sein. Konfiguriere deine Datenbank und Event-Einstellungen und du bist bereit loszulegen. Geniesse SB DJ.";
+
+// upload.php
+$output["uploadFailed"] = "Sorry, ich konnte die Datei nicht hochladen.";
+$output["uploadFileToLarge"] = "Sorry, deine Datei ist zu groß";
+$output["uploadSuccess"] = "Die Datei ". basename( $_FILES["importfile"]["name"]). " wurde hochgeladen.";
+$output["uploadWrongFileType"] = "Sorry, ich akzeptiere nur djay-erstellte CSV Dateien. ";

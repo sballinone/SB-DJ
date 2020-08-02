@@ -12,13 +12,19 @@ DJ Compagnon app
 
 **WISHLIST** Are you tired of guests interupting you with their wishes? As your Co-DJ, SB DJ allowes your guests sending their wishes without interupting you.
 
-**PLAYLIST** Create your playlist and CSV-export it at the end of the night.
+**PLAYLIST** Create your playlist and CSV-export it at the end of the night. If you prefer to provide your playlist at the end of the night, just import it.
 
 **QR CODE FLYER** Allow your guests to access the public part of SB DJ quickly by printing flyers with a QR Code.
 
 **WE SPEAK YOUR LANGUAGE** Provide your guests a localized experience. English, Spanisch and German built in. You can add as many languages as you want.
 
 **BUILT IN SECURITY** Secure your actor's part of the software from the public part. Disallow "double-votes" on wishes. High code quality.
+
+* * *
+
+## 2020.2 OUTVIEW
+
+Let's create your personal DJ profile. Import your djay session list and share it within the DJ community. Manage your setlists.
 
 * * *
 

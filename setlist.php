@@ -2,7 +2,7 @@
 
 session_start();
 
-if($_SESSION['backend'] != true) {
+if ($_SESSION['backend'] != true) {
     session_destroy();
     header("Location: login.php");
     exit;
@@ -21,7 +21,7 @@ $latestwish;
 
 $db = new mysqli($dbhost, $dbuser, $dbpass, $dbbase, $dbport);
 
-if($db->connect_errno) {
+if ($db->connect_errno) {
     die("Sorry, I could not connect to the database. Please check your configuration. <br /><br />".$db->connect_error);
 }
 
@@ -46,16 +46,16 @@ include("lang/".$_SESSION['lang'].".php");
 <div id="wrap">
     <div class="row" id="header">
         <div class="box">
-            <h1><?=$event;?></h1>
+            <h1><?=$event; ?></h1>
 
             <div class="btn">
-                <a href='backend.php' class='btnRefresh'><i class="icofont-play-pause"></i> <small><?=$output['back'];?></small></a>
+                <a href='backend.php' class='btnRefresh'><i class="icofont-play-pause"></i> <small><?=$output['back']; ?></small></a>
                 <a href='setlist.php?do=resetsetlist' class='btnDanger'><i class="icofont-ui-delete"></i></a>
                 <a href='login.php' class='btnDefault'><i class="icofont-logout"></i></a>
             </div>
 
             <div id="msg">
-                <?=$status->printMsg();?>
+                <?=$status->printMsg(); ?>
             </div>
         </div>
     </div>
@@ -64,7 +64,7 @@ include("lang/".$_SESSION['lang'].".php");
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <div class="box content">
 
-                <h2><?=$output['setlist'];?></h2>
+                <h2><?=$output['setlist']; ?></h2>
                 
                 <div class="newitem">
                     <form action="setlist.php?do=addsetlist" method="Post">
@@ -77,12 +77,12 @@ include("lang/".$_SESSION['lang'].".php");
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-md-4 col-xl-4">
                                     <div class="box">
-                                        <input type="text" placeholder="<?=$output['title'];?>" name="title" class="formText">
+                                        <input type="text" placeholder="<?=$output['title']; ?>" name="title" class="formText">
                                     </div>
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-md-4 col-xl-4">
                                     <div class="box">
-                                        <input type="text" placeholder="<?=$output['artist'];?>" name="artist" class="formText">
+                                        <input type="text" placeholder="<?=$output['artist']; ?>" name="artist" class="formText">
                                     </div>
                                 </div>
                                 <div class="col-xs-2 col-sm-2 col-md-2 col-xl-2">
@@ -111,7 +111,7 @@ include("lang/".$_SESSION['lang'].".php");
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <div class="box content">
 
-                <h2><?=$output['wishlist'];?></h2>
+                <h2><?=$output['wishlist']; ?></h2>
 
                 <?php
                 wishlist($db, 0);

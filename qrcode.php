@@ -2,7 +2,7 @@
 
 session_start();
 
-if($_SESSION['backend'] != true) {
+if ($_SESSION['backend'] != true) {
     session_destroy();
     echo "Permission denied. Please log in.";
     exit;
@@ -15,7 +15,7 @@ $footernav = false;
 $showrelease = false;
 
 // Find and encode URL, parse it to the QR Code API
-$uri = (isset($_SERVER['HTTPS'])?'https':'http').'://' . $_SERVER['HTTP_HOST'];
+$uri = (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'];
 $qrapi = "https://api.qrserver.com/v1/create-qr-code/?size=".$qrcodesize."x".$qrcodesize."&data=";
 $qrapi .= urlencode($uri);
 ?>
@@ -23,7 +23,7 @@ $qrapi .= urlencode($uri);
 <!DOCTYPE html>
 <html>
 <head>
-    <title><?=$event;?> &middot; SB DJ</title>
+    <title><?=$event; ?> &middot; SB DJ</title>
     <link rel="stylesheet" href="css/fonts.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="css/qrcode.css" type="text/css">
@@ -34,7 +34,7 @@ $qrapi .= urlencode($uri);
 <body>
 
 <div id="wrap">
-    <?php for($x=0; $x<4; $x++) {?>
+    <?php for ($x = 0; $x < 4; $x++) {?>
         <div class="tile">
             <div class="row">
                 <div class="box content">

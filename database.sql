@@ -2,7 +2,7 @@ CREATE TABLE `playlist` (
   `id` int(9) NOT NULL,
   `title` varchar(50) NOT NULL,
   `artist` varchar(50) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `waswish` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -10,7 +10,9 @@ function preview($text, $limit) {
     $text = preg_replace('/\[\/?(?:b|i|u|s|center|quote|url|ul|ol|list|li|\*|code|table|tr|th|td|youtube|gvideo|(?:(?:size|color|quote|name|url|img)[^\]]*))\]/', '', $text);
 
     // Shorten string if longer than limit
-    if (strlen($text) > $limit) return substr($text, 0, $limit) . "...";
+    if (strlen($text) > $limit) {
+        return substr($text, 0, $limit)."...";
+    }
 
     return $text;
 }
@@ -19,9 +21,9 @@ function playlist($db, $showDeleteIcon = true, $latest = false) {
     $playlist = array();
     $data = $db->query("SELECT * FROM playlist ORDER BY id DESC;");
     
-    while($song = $data->fetch_assoc()) {
-        $item = new CSong($song["id"],$song["title"],$song["artist"]);
-        $item->setupForPlaylist($song["timestamp"],$song["waswish"]);
+    while ($song = $data->fetch_assoc()) {
+        $item = new CSong($song["id"], $song["title"], $song["artist"]);
+        $item->setupForPlaylist($song["timestamp"], $song["waswish"]);
         array_push($playlist, $item);
     }
     
@@ -35,8 +37,8 @@ function wishlist($db, $latestwish) {
 
     $data = $db->query("SELECT * FROM wishlist ORDER BY accepted DESC, declined, votes DESC;");
     
-    while($song = $data->fetch_assoc()) {
-        $item = new CSong($song["id"],$song["title"],$song["artist"]);
+    while ($song = $data->fetch_assoc()) {
+        $item = new CSong($song["id"], $song["title"], $song["artist"]);
         $item->setupForWishlist($song["accepted"], $song["declined"], $song["votes"], $song["hostname"]);
         array_push($wishlist, $item);
     }
@@ -49,19 +51,19 @@ function wishlist($db, $latestwish) {
 function setlist($db, $limit = false) {
     
     $setlist = array();
-    if(!$limit) {
+    if (!$limit) {
         $data = $db->query("SELECT * FROM setlist ORDER BY sort DESC;");
     } else {
         $data = $db->query("SELECT * FROM setlist WHERE played LIKE '0' ORDER BY sort ASC LIMIT 1;");
     }
     
-    while($song = $data->fetch_assoc()) {
-        $item = new CSong($song["id"],$song["title"],$song["artist"]);
-        $item->setupForSetlist($song["comment"],$song["sort"],$song["played"]);
+    while ($song = $data->fetch_assoc()) {
+        $item = new CSong($song["id"], $song["title"], $song["artist"]);
+        $item->setupForSetlist($song["comment"], $song["sort"], $song["played"]);
         array_push($setlist, $item);
     }
     
     foreach ($setlist as $song) {
         echo $song->returnSetlist($limit);
-   }
+    }
 }

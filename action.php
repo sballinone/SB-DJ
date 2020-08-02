@@ -74,12 +74,51 @@ if(isset($_GET['do'])) {
 
                 // Write CSV file
                 $txt = fopen($filename,"w");
-                fwrite(/** @scrutinizer ignore-type */ $txt,'Timestamp,Artist,Title,From Wishlist'.PHP_EOL);
+                fwrite(/** @scrutinizer ignore-type */ $txt,'ID;Timestamp;Artist;Title;From Wishlist'.PHP_EOL);
                 while($song = $data->fetch_assoc()) {
-                    $csvline = date('d.m.Y h:i a', strtotime($song["timestamp"])).','.$song["artist"].','.$song["title"].','.$song["waswish"].PHP_EOL;
+                    $csvline = $song["id"].";".date('Y.m.d h:i:s a', strtotime($song["timestamp"])).';'.$song["artist"].';'.$song["title"].';'.$song["waswish"].PHP_EOL;
                     fwrite(/** @scrutinizer ignore-type */ $txt,$csvline);
                 }
                 fclose(/** @scrutinizer ignore-type */$txt);
+            }
+        break;
+
+        case 'import':
+            if(!isset($_GET['import'])) {
+                $status->setMsg('<form action="backend.php?do=import&import=true" method="POST" enctype="multipart/form-data">');
+                $status->setMsg($output["importfile"]);
+                $status->setMsg('<br /><input type="file" name="importfile" id="importfile">&nbsp;&nbsp;&nbsp;<input type="submit" value="'.$output['import'].'" name="submit"></form>');
+            } else {
+                // Upload the file (outsourced for improved readability)
+                include('upload.php');
+
+                $txt = fopen($target_file,"r");
+                
+                // Skip the first line (titles and table header)
+                $data = fgetcsv($txt);
+                
+                // Do the import...
+                while(!feof($txt)) {
+                    $data = fgetcsv($txt);
+
+                    // Format the timestamp for the database
+                    $timestamp = $data[3];
+                    $timestamp = explode("T",$timestamp);
+                    $timestamp = $timestamp[0]." ".trim($timestamp[1],"Z");
+
+                    // Insert into the database
+                    $sql="INSERT INTO playlist VALUES (
+                        NULL,
+                        '".$data[0]."',
+                        '".$data[1]."',
+                        '".$timestamp."',
+                        0);";
+                    $db->query($sql);
+                }
+                fclose($txt);
+
+                // Remove the file
+                unlink($target_file);
             }
         break;
 
@@ -117,7 +156,7 @@ if(isset($_GET['do'])) {
         break;
 
         case 'allowcookies':
-            setcookie('allowCookies', true, time() + 3600);
+            setcookie('allowCookies', "true", time() + 3600);
             header('Location: index.php');
         break;
 

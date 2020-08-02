@@ -6,8 +6,8 @@ session_start();
 include("config.php");
 include("multilanguage.php");
 
-if(isset($_POST['pwd'])) {
-    if(strip_tags($_POST['pwd']) == $pwd) {
+if (isset($_POST['pwd'])) {
+    if (strip_tags($_POST['pwd']) == $pwd) {
         $_SESSION['backend'] = true;
         header("Location: backend.php");
         exit;
@@ -33,8 +33,8 @@ if(isset($_POST['pwd'])) {
 <div id="login-wrap">
    <div id="login-form">
         <form action="login.php" method="POST">
-            <input type="password" placeholder="<?=$output['password'];?>" name="pwd">&nbsp;&nbsp;&nbsp;
-            <input type="submit" value="<?=$output['login'];?>">
+            <input type="password" placeholder="<?=$output['password']; ?>" name="pwd">&nbsp;&nbsp;&nbsp;
+            <input type="submit" value="<?=$output['login']; ?>">
         </form>
     </div>
 </div>

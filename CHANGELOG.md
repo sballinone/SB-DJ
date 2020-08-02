@@ -4,6 +4,28 @@
 
 | Mayor | Minor | Build |
 | ----- | ----- | ----- |
+| 2020  | 1     | 2     |
+
+> **NEW**
+>
+> -   Import CSV files
+
+> **FIXES**
+>
+> -   CSV export fixed
+
+> **ENHANCEMENTS**
+>
+> -   Autofocus set to playlist title in the backend.
+
+> **NEW CLASSES**
+
+> **COMMENTS**
+
+* * *
+
+| Mayor | Minor | Build |
+| ----- | ----- | ----- |
 | 2020  | 1     | 1     |
 
 > **NEW**

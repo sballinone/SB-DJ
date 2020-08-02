@@ -55,6 +55,7 @@ include("lang/".$_SESSION['lang'].".php");
                 <a href='backend.php?do=reset' class='btnDanger'><i class="icofont-database-remove"></i></a>
                 <a href='setlist.php' class='btnDefault'><i class='icofont-disc'></i> <small><?=$output['setlist'];?></small></a>
                 <a href='backend.php?do=export' class='btnDefault'><i class="icofont-external-link"></i> <small><?=$output['export'];?></small></a>
+                <a href='backend.php?do=import' class='btnDefault'><i class="icofont-file-sql"></i> <small><?=$output['import'];?></small></a>
                 <a href='qrcode.php' class='btnDefault' target='_blank'><i class="icofont-qr-code"> <small><?=$output['qrflyer'];?></small></i></a>
                 <a href='setup.php' class='btnDefault'><i class="icofont-settings-alt"></i></a>
                 <a href='login.php' class='btnDefault'><i class="icofont-logout"></i></a>
@@ -83,7 +84,7 @@ include("lang/".$_SESSION['lang'].".php");
                                 </div>
                                 <div class="col-xs-5 col-sm-5 col-md-5 col-xl-5">
                                     <div class="box">
-                                        <input type="text" placeholder="<?=$output['title'];?>" name="title" class="formText">
+                                        <input type="text" placeholder="<?=$output['title'];?>" name="title" class="formText" autofocus>
                                     </div>
                                 </div>
                                 <div class="col-xs-4 col-sm-4 col-md-4 col-xl-4">
