@@ -34,7 +34,7 @@ include("lang/".$_SESSION['lang'].".php");
 <html>
 <head>
     <title><?=$event; ?> &middot; SB DJ</title>
-    <link rel="stylesheet" href="css/fonts.css" type="text/css">
+    <link rel="stylesheet" href="./assets/css/fonts.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="external/flexboxgrid.min.css" type="text/css">
     <link rel="stylesheet" href="external/icofont/icofont.min.css" type="text/css">
@@ -42,17 +42,53 @@ include("lang/".$_SESSION['lang'].".php");
 </head>
 <body>
 
+<div id="ciHeader">
+	<div class="row">
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+			<div class="box" id="logo">
+				<img src="./assets/img/logo/white/Logo-Square-White.png" alt="World of SB">
+				DJ
+				<span style="color: #ff8a00">2020</span>
+				<span style="color: #666666">· <?=$event;?></span>
+			</div>
+		</div>
+		<div class="col-xs-2 col-sm-4 col-md-5 col-lg-5">
+			<div class="box">
+				&nbsp;
+			</div>
+		</div>
+		<div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
+			<?php if($export) { ?>
+				<div class="box logout" onclick="javascript:location.href='index.php?do=export'">
+					<a href="index.php?do=export"><i class="icofont-external"></i></a>
+				</div>
+			<?php } ?>
+		</div>
+		<div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
+			<?php if($footernav) { ?>
+				<div class="box logout" onclick="javascript:location.href='backend.php'">
+					<a href='backend.php'><i class="icofont-retro-music-disk"></i></a>
+				</div>
+			<?php } ?>
+		</div>
+		<div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
+			<div class="box" id="tripSum" onclick="javascript:location.href='index.php'">
+				<i class='icofont-refresh'></i>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div id="wrap">
     <div class="row" id="header">
         <div class="box">
-            <h1><?=$event; ?></h1>
 
             <div id="btn">
-                <a href='index.php' class='btnRefresh'><i class="icofont-refresh"></i> <small><?=$output['refresh']; ?></small></a>
-                <a href='#playlist' class='btnDefault'><i class="icofont-sound-wave"></i> <small><?=$output['playlist']; ?></small></a>
+                <a href='index.php' class='btnRefresh'><i class="icofont-refresh"></i>&nbsp;<small><?=$output['refresh']; ?></small></a>
+                <a href='#playlist' class='btnDefault'><i class="icofont-sound-wave"></i>&nbsp;<small><?=$output['playlist']; ?></small></a>
                 <?php
                 if ($export) { 
-                    echo "<a href='index.php?do=export' class='btnDefault'><i class='icofont-external-link'></i> <small>".$output['export']."</small></a>";
+                    echo "<a href='index.php?do=export' class='btnDefault'><i class='icofont-external-link'></i>&nbsp;<small>".$output['export']."</small></a>";
                 }
                 ?>
             </div>
@@ -110,11 +146,12 @@ include("lang/".$_SESSION['lang'].".php");
             </div>
         </div>
     </div>
-</div>
 
 <?php 
 
 include("footer.php"); 
+
+echo "</div>";
 
 if (!strip_tags($_COOKIE['allowCookies']) && $cookieconsent) {
     echo '<div id="cookieconsent" class="latestwish">'.$output["cookieconsent"].' <a href="index.php?do=allowcookies">'.$output["allow"].'</a></div>';

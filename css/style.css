@@ -6,32 +6,97 @@
  */
 
 body {
-    background-color: #162447;
-    color: #fff;
-    font-family: "Lato", sans-serif;
-    font-size: 12pt;
+    background-color: #222222;
+	color: #ffffff;
+	font-family: "PT Sans", sans;
+	font-size: 12pt;
     font-weight: 300;
-    line-height: 1.5;
+	line-height: 1.5;
+	margin: 0;
+	text-align: justify;
 }
 
-a {
-    background-color: #1f4068;
-    border-radius: 10px;
-    color: #fff;
+#ciHeader {
+	z-index: 98;
+	background-color: #000000;
+	box-sizing: border-box;
+	color: #ffffff;
+	height: 75px;
+	overflow: hidden;
+	position: fixed;
+	width: 100%;
+}
+
+#logo {
+	font-family: "PT Sans", sans;
+	font-size: 12pt;
+	font-weight: 700;
+	letter-spacing: 2px;
+	line-height: 54px;
+	padding: 10px 40px;
+	text-align: left;
+	text-transform: uppercase;
+	vertical-align: middle;
+}
+
+#logo img {
+	height: 54px;
+	vertical-align: middle;
+}
+
+#tripSum {
+	background-color: green;
+	box-sizing: border-box;
+	cursor: pointer;
+	font-size: 25px;
+	font-weight: 700;
+	height: 75px;
+	line-height: 75px;
+	text-align: center;
+}
+
+#tripSum small {
+	font-size: 20px;
+}
+
+.logout {
+	cursor: pointer;
+	font-size: 20px;
+	line-height: 75px;
+	text-align: center;
+}
+
+.logout a {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+#wrap {
+    position: absolute;
+    top: 75px;
+    width: 100%;
+}
+/* OLD */
+
+#wrap a {
+    color: #ffffff;
+    border: 1px #c0c0c0 solid;
     margin: 0 5px 0 0;
     padding: 5px 10px;
     text-decoration: none;
 }
 
-a:hover {
+#wrap a:hover {
     background-color: #e43f5a;
 }
 
 h1, 
 h2, 
 h3 {
-    font-family: "Playfair Display", serif;
-    font-weight: 400;
+    font-family: "PT Sans", sans;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 h1 {
@@ -43,11 +108,21 @@ h2, h3 {
 }
 
 .item {
-    background-color: #1f4068;
-    border-radius: 10px;
-    margin: 0 -5px 5px -5px;
-    padding: 5px 10px;
+    background-color: #ffffff;
+    color: #000000;
+    /*border: 1px #ffffff solid;*/
+    margin: 0 -5px 1px -5px;
+    padding: 5px 25px;
     vertical-align: middle;
+}
+
+.item a {
+    background-color: #ffffff;
+    color: #666666;
+}
+
+.item a i {
+    color: #666666;
 }
 
 .item .box {
@@ -59,18 +134,27 @@ h2, h3 {
 }
 
 .title {
-    font-family: "Playfair Display", serif;
-    font-size: 15pt;
+    font-family: "PT Sans", sans;
+    font-size: 10pt;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
 }
 
 .artist {
-    font-size: 10pt;
+    font-size: 8pt;
+    text-transform: uppercase;
 }
 
 .votes, 
-.hostname, 
+.hostname {
+    font-size: 8pt;
+}
+
 .timestamp {
     font-size: 8pt;
+    background-color: #ffffff;
+    color: #666666;
 }
 
 .actions {
@@ -82,8 +166,9 @@ h2, h3 {
 .btnDefault,
 .btnDanger,
 .removeFromPlaylist {
-    background-color: #1f4068;
-    border-radius: 5px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 2px #ffffff solid;
     font-size: 12pt;
     margin: 0 5px 0 0;
     padding: 5px 10px;
@@ -98,7 +183,9 @@ h2, h3 {
 
 .btnDefault:hover,
 .removeFromPlaylist:hover {
-    background-color: #4B6686;
+    background-color: #000000;
+    color: #ffffff;
+    border: 2px #000000 solid;
 }
 
 .btnDanger:hover,
@@ -108,10 +195,12 @@ h2, h3 {
 
 .btnRefresh {
     background-color: #40681F;
+    color: #ffffff;
 }
 
 .btnDanger {
     background-color: #681F40;
+    color: #ffffff;
 }
 
 .accepted,
@@ -120,26 +209,41 @@ h2, h3 {
 .accepted .vote,
 .played {
     background-color: #40681F;
+    color: #ffffff;
 }
 
 .accepted .vote:hover {
     background-color: #e43f5a;
+    color: #ffffff;
 }
 
 .declined {
     background-color: #681F40;
+    color: #ffffff;
 }
 
 .latestwish {
     animation: latestwish 1s;
     background-color: #1f4068;
+    color: #ffffff;
 }
 
 .setlist {
-    background-color: #162447;
-    border-color: #1f4068;
+    background-color: #222222;
+    border-color: #ffffff;
     border-style: solid;
     border-width: 0 3px;
+    color: #ffffff;
+}
+
+.setlist .timestamp {
+    background-color: #a0a0a0;
+}
+
+.setlist a,
+.setlist a i {
+    background-color: transparent;
+    color: yellowgreen;
 }
 
 @keyframes latestwish {
@@ -160,9 +264,8 @@ h2, h3 {
 }
 
 #msg {
-    background-color: #1f4068;
-    border-radius: 10px;
-    color: #fff;
+    background-color: #ffffff;
+    color: #000000;
     margin: 10px 0 0 0;
     padding: 5px 10px;
     text-decoration: none;
@@ -170,7 +273,7 @@ h2, h3 {
 
 #msg i {
     color: #d0d3da;
-    font-family: "Playfair Display", serif;
+    font-family: "PT Sans", sans;
     font-style: normal;
 }
 
@@ -182,6 +285,10 @@ h2, h3 {
 #msg i::after {
     color: #d0d3da;
     content: " » ";
+}
+
+#header {
+    padding-top: 40px;
 }
 
 #header a {
@@ -198,7 +305,7 @@ h2, h3 {
 #header .box,
 .content {
     margin: 0;
-    padding: 15px 25px;
+    padding: 15px 40px 5px 40px;
 }
 
 #footer small {
@@ -213,11 +320,10 @@ form textarea {
     -moz-appearance: none;
     appearance: none;
 
-    background-color: #4B6686;
-    border-radius: 10px;
+    background-color: #efefef;
     border: 0;
-    color: #fff;
-    font-family: "Lato", sans-serif;
+    color: #000000;
+    font-family: "PT Sans", sans;
     font-size: 12pt;
     font-weight: 300;
     margin: 0 0 0 -5px;
@@ -244,7 +350,7 @@ form .formSubmit {
 }
 
 form .item {
-    margin-bottom: 10px;
+    margin-bottom: 1px; /* old: 10px; */
 }
 
 ::placeholder,
@@ -292,12 +398,14 @@ form .item {
     line-height: 2;
     padding: 15px 25px;
     position: fixed;
-    top: 150px;
+    top: 75px;
     width: 100%;
 }
 
 #cookieconsent a {
-    background-color: #162447;
+    background-color: #ffffff;
+    color: #000000;
+    padding: 5px 15px;
 }
 
 #cookieconsent a:hover {

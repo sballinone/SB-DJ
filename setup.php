@@ -1,5 +1,5 @@
 <?php
-$release = "2020.1.2";
+$release = "2020.1.3";
 
 session_start();
 
@@ -150,11 +150,43 @@ include("lang/".$_SESSION['lang'].".php");
 </head>
 <body>
 
+
+
+<div id="ciHeader">
+	<div class="row">
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+			<div class="box" id="logo">
+				<img src="./assets/img/logo/white/Logo-Square-White.png" alt="World of SB">
+				DJ
+				<span style="color: #ff8a00">2020</span>
+				<span style="color: #666666">· <?=$event;?></span>
+			</div>
+		</div>
+		<div class="col-xs-2 col-sm-4 col-md-5 col-lg-5">
+			<div class="box">
+				&nbsp;
+			</div>
+		</div>
+		<div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
+            &nbsp;
+		</div>
+		<div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
+            <div class="box logout" onclick="javascript:location.href='index.php'">
+                <a href='index.php'><i class="icofont-music-notes"></i></a>
+            </div>
+		</div>
+		<div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
+			<div class="box" id="tripSum" onclick="javascript:location.href='backend.php'">
+				<i class='icofont-refresh'></i>
+			</div>
+		</div>
+	</div>
+</div>
+
     
 <div id="wrap">
     <div class="row" id="header">
         <div class="box">
-            <h1>SB DJ · <?=$output['setupWelcome']; ?></h1>
             
             <div id="btn">
                 <a href='javascript:document.forms["frmSetup"].submit()' class='btnRefresh'><i class="icofont-check"></i> <small><?=$output['setupUpdate']; ?></small></a>
@@ -414,7 +446,6 @@ include("lang/".$_SESSION['lang'].".php");
             </div>
         </div>
     </form>
-</div>
 
 <?php 
 // Language settings
@@ -423,6 +454,8 @@ $footernav = false;
 $credits = true;
 $showrelease = true;
 include("footer.php"); 
+
+echo "</div>";
 ?>
 
 <script src="https://risara.events/UPDATE/sbdj.js"></script>

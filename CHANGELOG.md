@@ -4,6 +4,24 @@
 
 | Mayor | Minor | Build |
 | ----- | ----- | ----- |
+| 2020  | 1     | 3     |
+
+> **NEW**
+>
+> -   The SB Design is there. We aligned the UI to fit into the CI of World of SB.
+
+> **FIXES**
+
+> **ENHANCEMENTS**
+
+> **NEW CLASSES**
+
+> **COMMENTS**
+
+* * *
+
+| Mayor | Minor | Build |
+| ----- | ----- | ----- |
 | 2020  | 1     | 2     |
 
 > **NEW**
