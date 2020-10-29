@@ -458,7 +458,7 @@ include("footer.php");
 echo "</div>";
 ?>
 
-<script src="https://risara.events/UPDATE/sbdj.js"></script>
+<script src="https://updates.sbviatges.com/sbdj/update.js"></script>
 <?php
 $releasedata = explode(".", $release);
 echo "<script>var relmajor = ".$releasedata[0]."; var relminor = ".$releasedata[1]."; var relbuilt = ".$releasedata[2].";</script>";
