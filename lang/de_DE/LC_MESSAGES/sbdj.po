@@ -1,0 +1,320 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: SB DJ 2024\n"
+"POT-Creation-Date: 2024-07-10 01:24+0200\n"
+"PO-Revision-Date: 2024-07-10 01:26+0200\n"
+"Last-Translator: \n"
+"Language-Team: Saskia Brückner\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.4\n"
+"X-Poedit-Basepath: ../../..\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: assets\n"
+
+#: backend.php:85 index.php:85
+msgid "Refresh"
+msgstr "Neu laden"
+
+#: backend.php:88 setlist.php:97
+msgid "Setlist"
+msgstr "Setliste"
+
+#: backend.php:89 index.php:89
+msgid "Export"
+msgstr "Exportieren"
+
+#: backend.php:90 inc/action.php:90
+msgid "Import"
+msgstr "Importieren"
+
+#: backend.php:91 setup.php:418
+msgid "QR Flyer"
+msgstr "QR Flyer"
+
+#: backend.php:106 index.php:86 index.php:139
+msgid "Playlist"
+msgstr "Playlist"
+
+#: backend.php:119 backend.php:156 index.php:111 setlist.php:110
+msgid "Title"
+msgstr "Titel"
+
+#: backend.php:124 backend.php:161 index.php:116 setlist.php:115
+msgid "Artist"
+msgstr "Interpret"
+
+#: backend.php:148 index.php:103 setlist.php:139
+msgid "Wishlist"
+msgstr "Wunschliste"
+
+#: inc/action.php:17
+#, php-format
+msgid "Sorry, the song <i>%s</i> already has been played."
+msgstr "Entschuldige, der Song <i>%s</i> wurde bereits gespielt."
+
+#: inc/action.php:24
+#, php-format
+msgid "Sorry, the song <i>%s</i> is already on the wishlist."
+msgstr "Entschuldige, der Song <i>%s</i> ist bereits auf der Wunschliste."
+
+#: inc/action.php:48
+#, php-format
+msgid "Your wish <i>%s</i> has been added."
+msgstr "Dein Wunsch <i>%s</i> wurde hinzugefügt."
+
+#: inc/action.php:53 inc/action.php:154
+msgid ""
+"Sorry, you need to allow cookies. <a href='javascript:allowcookies()'>Allow "
+"cookies</a>"
+msgstr ""
+"Entschuldige, du musst Cookies akzeptieren um fortzufahren. <a "
+"href='javascript:allowcookies()'>Cookies zulassen</a>"
+
+#: inc/action.php:69
+msgid ""
+"Playlist successfully exported. <a href='export.csv' target='_blank' "
+"style='color: #000'>Open CSV</a>"
+msgstr ""
+"Die Playlist wurde erfolgreich exportiert. <a href='export.csv' "
+"target='_blank' style='color: #000'>CSV öffnen</a>"
+
+#: inc/action.php:72
+msgid ""
+"Playlist successfully exported. <a href='export_cust.csv' target='_blank' "
+"style='color: #000'>Open CSV</a>"
+msgstr ""
+"Die Playlist wurde erfolgreich exportiert. <a href='export_cust.csv' "
+"target='_blank' style='color: #000'>CSV öffnen</a>"
+
+#: inc/action.php:89
+msgid "CSV file (Djay formatted): "
+msgstr "CSV-Datei (Djay formatiert): "
+
+#: inc/action.php:131
+msgid "Oh no! You already voted for this song."
+msgstr "Oh no! Du hast bereits für diesen Song gestimmt."
+
+#: inc/action.php:151
+#, php-format
+msgid "Yeah! You voted for <i>%s</i>."
+msgstr "Yeah! Du hast für <i>%s</i> gestimmt."
+
+#: inc/action.php:169
+msgid "Reset wishlist?"
+msgstr "Wunschliste zurücksetzen?"
+
+#: inc/action.php:170 inc/action.php:186 inc/action.php:204 inc/action.php:399
+msgid "Yes"
+msgstr "Ja"
+
+#: inc/action.php:171 inc/action.php:187 inc/action.php:205
+msgid "No"
+msgstr "Nein"
+
+#: inc/action.php:177
+msgid "Wishlist reset successful."
+msgstr "Wunschliste erfolgreich zurückgesetzt."
+
+#: inc/action.php:185
+msgid "Reset setlist?"
+msgstr "Setliste zurücksetzen?"
+
+#: inc/action.php:195
+msgid "Setlist reset successful."
+msgstr "Setliste erfolgreich zurückgesetzt."
+
+#: inc/action.php:203
+msgid "Reset all? This clears the wishlist and the playlist."
+msgstr "Alles zurücksetzen? Dies löscht die Wunschliste und Playlist."
+
+#: inc/action.php:223
+msgid "Reset successful."
+msgstr "Erfolgreich zurückgesetzt."
+
+#: inc/action.php:242 inc/action.php:386
+#, php-format
+msgid "Song <i>%s</i> added."
+msgstr "Song <i>%s</i> hinzugefügt."
+
+#: inc/action.php:253 inc/action.php:264 inc/action.php:286
+#, php-format
+msgid "Song #%s removed."
+msgstr "Song #%s gelöscht."
+
+#: inc/action.php:297
+#, php-format
+msgid "Song #%s accepted."
+msgstr "Song #%s akzeptiert."
+
+#: inc/action.php:308
+#, php-format
+msgid "Song #%s declined."
+msgstr "Song #%s abgelehnt."
+
+#: inc/action.php:333
+#, php-format
+msgid "Song <i>%s</i> moved to playlist."
+msgstr "Song <i>%s</i> auf die Playlist verschoben."
+
+#: inc/action.php:359
+#, php-format
+msgid "Song <i>%s</i> copied to playlist."
+msgstr "Song <i>%s</i> auf die Playlist kopiert."
+
+#: inc/action.php:370
+#, php-format
+msgid "Sorry, the song <i>%s</i> is already on the setlist."
+msgstr "Entschuldige, der Song <i>%s</i> ist bereits auf der Setliste."
+
+#: inc/action.php:398
+#, php-format
+msgid "Sorry, the song <i>%s</i> is already on the setlist. Remove wish?"
+msgstr ""
+"Entschuldige, der Song <i>%s</i> ist bereits auf der Setliste. Wunsch "
+"löschen?"
+
+#: inc/action.php:425
+#, php-format
+msgid "Song <i>%s</i> moved."
+msgstr "Song <i>%s</i> verschoben."
+
+#: inc/upload.php:12
+msgid "Sorry, your file is too large."
+msgstr "Sorry, die Datei ist zu groß."
+
+#: inc/upload.php:17
+msgid "Sorry, only djay styled CSV files are allowed."
+msgstr "Sorry, nur Djay formatierte CSV-Dateien erlaubt."
+
+#: inc/upload.php:22 inc/upload.php:27
+msgid "Sorry, there was an error uploading your file."
+msgstr "Sorry, es gab einen Fehler beim Upload."
+
+#: inc/upload.php:25
+#, php-format
+msgid "The file %s has been uploaded."
+msgstr "Die Datei %s wurde hochgeladen."
+
+#: index.php:156
+msgid ""
+"This software uses cookies for some functionalities like voting or wishing. "
+"Cookies are small pieces of data stored on your device. Without cookies, "
+"these functionalities cannot be provided."
+msgstr ""
+"Diese Software nutzt Cookies, damit du wünschen und abstimmen kannst. "
+"Cookies sind kleine Datenpakete, die auf deinem Gerät gespeichert werden. "
+"Ohne Cookies kannst du diese Software nicht verwenden."
+
+#: index.php:156
+msgid "Allow cookies"
+msgstr "Cookies zulassen"
+
+#: login.php:15
+msgid "Sorry, the password you entered isn\\'t correct.\\n\\nPlease try again."
+msgstr ""
+"Entschuldige, das eingegebene Passwort ist nicht korrekt.\\n\\nBitte "
+"versuche es erneut."
+
+#: login.php:61 setup.php:345 setup.php:350
+msgid "Password"
+msgstr "Passwort"
+
+#: login.php:62
+msgid "Login"
+msgstr "Login"
+
+#: setlist.php:82
+msgid "Back"
+msgstr "Zurück"
+
+#: setup.php:101
+msgid "Settings saved"
+msgstr "Konfiguration gespeichert"
+
+#: setup.php:108
+msgid ""
+"Hi! Nice to see you. You will be amazed. Configure your database and event "
+"settings and you're ready to go. Enjoy SB DJ."
+msgstr ""
+"Hi! Ich freue mich, dich zu sehen. Du wirst begeistert sein. Konfiguriere "
+"deine Datenbank und Event-Einstellungen und du bist bereit loszulegen. Enjoy "
+"SB DJ."
+
+#: setup.php:194
+msgid "Save configuration"
+msgstr "Speichere Konfiguration"
+
+#: setup.php:198
+msgid "DB status"
+msgstr "DB Status"
+
+#: setup.php:215
+msgid "Global settings"
+msgstr "Globale Einstellungen"
+
+#: setup.php:221 setup.php:226
+msgid "MySQL Host"
+msgstr "MySQL Host"
+
+#: setup.php:233 setup.php:238
+msgid "MySQL Database"
+msgstr "MySQL Datenbank"
+
+#: setup.php:245 setup.php:250
+msgid "MySQL User"
+msgstr "MySQL Benutzer"
+
+#: setup.php:257 setup.php:262
+msgid "MySQL Password"
+msgstr "MySQL Passwort"
+
+#: setup.php:269 setup.php:274
+msgid "MySQL Port"
+msgstr "MySQL Port"
+
+#: setup.php:284
+msgid "Show shortcuts for DJ"
+msgstr "Zeige DJ Shortcuts"
+
+#: setup.php:296
+msgid "Support me and view credits"
+msgstr "Unterstütze mich und aktiviere Credits"
+
+#: setup.php:308
+msgid "Show the software release"
+msgstr "Zeige die Softwareversion"
+
+#: setup.php:324
+msgid "Event"
+msgstr "Event"
+
+#: setup.php:330 setup.php:335
+msgid "Event title"
+msgstr "Titel des Events"
+
+#: setup.php:360 setup.php:365
+msgid "Default language"
+msgstr "Standardsprache"
+
+#: setup.php:372
+msgid "Show language selector"
+msgstr "Zeige Sprachauswahl"
+
+#: setup.php:387
+msgid "Allow playlist export"
+msgstr "Aktiviere Playlist-Export"
+
+#: setup.php:402
+msgid "Show EU Cookie Consent"
+msgstr "Zeige EU Cookie-Banner"
+
+#: setup.php:424 setup.php:429
+msgid "Text on QR Flyer"
+msgstr "Text auf QR Flyer"
+
+#: setup.php:436 setup.php:441
+msgid "QR Code in px"
+msgstr "QR Code in Px"

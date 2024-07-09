@@ -2,7 +2,7 @@
 
 session_start();
 
-if ($_SESSION['backend'] != true) {
+if (!isset($_SESSION['backend'])) {
     session_destroy();
     echo "Permission denied. Please log in.";
     exit;
@@ -24,11 +24,11 @@ $qrapi .= urlencode($uri);
 <html>
 <head>
     <title><?=$event; ?> &middot; SB DJ</title>
-    <link rel="stylesheet" href="css/fonts.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="stylesheet" href="css/qrcode.css" type="text/css">
-    <link rel="stylesheet" href="css/flexboxgrid.min.css" type="text/css">
-    <link rel="stylesheet" href="icofont/icofont.min.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/fonts.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/qrcode.css" type="text/css">
+    <link rel="stylesheet" href="assets/external/flexboxgrid.min.css" type="text/css">
+    <link rel="stylesheet" href="assets/icofont/icofont.min.css" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>

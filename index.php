@@ -8,15 +8,16 @@ if (!file_exists("config.php")) {
 }
 
 include("config.php");
-include("multilanguage.php");
+include("inc/localization.php");
 
-include("CMsg.php");
-include("CSong.php");
+include("class/CMsg.php");
+include("class/CSong.php");
 
-include("functions.php");
+include("inc/functions.php");
+
 
 $status = new CMsg();
-$latestwish;
+$latestwish = "";
 
 $db = new mysqli($dbhost, $dbuser, $dbpass, $dbbase, $dbport);
 
@@ -24,20 +25,17 @@ if ($db->connect_errno) {
     die("Sorry, I could not connect to the database. Please contact the service staff. <br /><br />".$db->connect_error);
 }
 
-require_once "action.php";
-
-// Workaround
-include("lang/".$_SESSION['lang'].".php");
+require_once "inc/action.php";
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title><?=$event; ?> &middot; SB DJ</title>
-    <link rel="stylesheet" href="./assets/css/fonts.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="stylesheet" href="external/flexboxgrid.min.css" type="text/css">
-    <link rel="stylesheet" href="external/icofont/icofont.min.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/fonts.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="assets/external/flexboxgrid.min.css" type="text/css">
+    <link rel="stylesheet" href="assets/external/icofont/icofont.min.css" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -46,9 +44,9 @@ include("lang/".$_SESSION['lang'].".php");
 	<div class="row">
 		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 			<div class="box" id="logo">
-				<img src="./assets/img/logo/white/Logo-Square-White.png" alt="World of SB">
+				<img src="./assets/img/Logo-Square-White.png" alt="World of SB">
 				DJ
-				<span style="color: #ff8a00">2020</span>
+				<span style="color: #ff8a00">2024</span>
 				<span style="color: #666666">· <?=$event;?></span>
 			</div>
 		</div>
@@ -84,11 +82,11 @@ include("lang/".$_SESSION['lang'].".php");
         <div class="box">
 
             <div id="btn">
-                <a href='index.php' class='btnRefresh'><i class="icofont-refresh"></i>&nbsp;<small><?=$output['refresh']; ?></small></a>
-                <a href='#playlist' class='btnDefault'><i class="icofont-sound-wave"></i>&nbsp;<small><?=$output['playlist']; ?></small></a>
+                <a href='index.php' class='btnRefresh'><i class="icofont-refresh"></i>&nbsp;<small><?=_("Refresh"); ?></small></a>
+                <a href='#playlist' class='btnDefault'><i class="icofont-sound-wave"></i>&nbsp;<small><?=_("Playlist"); ?></small></a>
                 <?php
                 if ($export) { 
-                    echo "<a href='index.php?do=export' class='btnDefault'><i class='icofont-external-link'></i>&nbsp;<small>".$output['export']."</small></a>";
+                    echo "<a href='index.php?do=export' class='btnDefault'><i class='icofont-external-link'></i>&nbsp;<small>"._("Export")."</small></a>";
                 }
                 ?>
             </div>
@@ -102,7 +100,7 @@ include("lang/".$_SESSION['lang'].".php");
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <div class="box content">
-                <h2><?=$output['wishlist']; ?></h2>
+                <h2><?=_("Wishlist"); ?></h2>
                 
                 <div class="newitem">
                     <form action="index.php?do=addwish" method="Post">
@@ -110,12 +108,12 @@ include("lang/".$_SESSION['lang'].".php");
                             <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-xl-6">
                                     <div class="box">
-                                        <input type="text" placeholder="<?=$output['title']; ?>" name="title" class="formText">
+                                        <input type="text" placeholder="<?=_("Title"); ?>" name="title" class="formText">
                                     </div>
                                 </div>
                                 <div class="col-xs-5 col-sm-5 col-md-5 col-xl-5">
                                     <div class="box">
-                                        <input type="text" placeholder="<?=$output['artist']; ?>" name="artist" class="formText">
+                                        <input type="text" placeholder="<?=_("Artist"); ?>" name="artist" class="formText">
                                     </div>
                                 </div>
                                 <div class="col-xs-1 col-sm-1 col-md-1 col-xl-1">
@@ -138,7 +136,7 @@ include("lang/".$_SESSION['lang'].".php");
 
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <div class="box content">
-                <h2><?=$output['playlist']; ?><a name="playlist" style="visibility: hidden"></a></h2>
+                <h2><?=_("Playlist"); ?><a name="playlist" style="visibility: hidden"></a></h2>
 
                 <?php
                 playlist($db);
@@ -148,13 +146,14 @@ include("lang/".$_SESSION['lang'].".php");
     </div>
 
 <?php 
+include("inc/footer.php"); 
+?>
 
-include("footer.php"); 
+</div>
 
-echo "</div>";
-
-if (!strip_tags($_COOKIE['allowCookies']) && $cookieconsent) {
-    echo '<div id="cookieconsent" class="latestwish">'.$output["cookieconsent"].' <a href="index.php?do=allowcookies">'.$output["allow"].'</a></div>';
+<?php
+if (!isset($_COOKIE['allowCookies']) && $cookieconsent) {
+    echo '<div id="cookieconsent" class="latestwish">'._("This software uses cookies for some functionalities like voting or wishing. Cookies are small pieces of data stored on your device. Without cookies, these functionalities cannot be provided.").' <a href="index.php?do=allowcookies">'._("Allow cookies").'</a></div>';
     echo "<style>#wrap { position: fixed; }</style>";
 }
 ?>

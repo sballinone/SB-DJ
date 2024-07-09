@@ -4,6 +4,29 @@
 
 | Mayor | Minor | Build |
 | ----- | ----- | ----- |
+| 2024  | 1     | 0     |
+
+> **NEW**
+
+> **FIXES**
+>
+> -   Compatibility update for PHP8.
+
+> **ENHANCEMENTS**
+>
+> -   Switched translations from Array to gettext.
+> -   Cleaned the complete code structure.
+
+> **NEW CLASSES**
+
+> **COMMENTS**
+> 
+> This project was created as a small project for a birthday party - quick and dirty. The code was not the most beautiful one. I went through the whole code, restructured it and created a new 2024 release. It is more beautiful and better structured, uses gettext now instead of arrays and is fully compatible to PHP8. The new structured and cleaner code makes SB DJ a great  app to host your own event.
+
+* * *
+
+| Mayor | Minor | Build |
+| ----- | ----- | ----- |
 | 2020  | 1     | 3     |
 
 > **NEW**

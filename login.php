@@ -4,31 +4,31 @@ session_destroy();
 session_start();
 
 include("config.php");
-include("multilanguage.php");
+include("inc/localization.php");
 
 if (isset($_POST['pwd'])) {
-    if (strip_tags($_POST['pwd']) == $pwd) {
+    if (htmlspecialchars($_POST['pwd']) == $pwd) {
         $_SESSION['backend'] = true;
         header("Location: backend.php");
         exit;
     } else {
-        echo "<script>alert('".$output['passwordIncorrect']."');</script>";
+        echo "<script>alert('"._("Sorry, the password you entered isn\'t correct.\\n\\nPlease try again.")."');</script>";
     }
 }
 
 ?>
 
 <!DOCTYPE html>
-<html lang="de">
+<html>
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>SB DJ · <?=$event;?></title>
 
-	<link rel="stylesheet" href="./assets/css/fonts.css" type="text/css">
-	<link rel="stylesheet" href="./assets/css/style.css" type="text/css">
-	<link rel="stylesheet" href="./assets/external/icofont/icofont.min.css" type="text/css">
-	<link rel="stylesheet" href="./assets/external/flexboxgrid/flexboxgrid.min.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/fonts.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/signin.css" type="text/css">
+	<link rel="stylesheet" href="assets/external/icofont/icofont.min.css" type="text/css">
+	<link rel="stylesheet" href="assets/external/flexboxgrid.min.css" type="text/css">
 </head>
 <body>
 
@@ -36,9 +36,9 @@ if (isset($_POST['pwd'])) {
 	<div class="row">
 		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 			<div class="box" id="logo">
-				<img src="./assets/img/logo/white/Logo-Square-White.png" alt="World of SB">
+				<img src="assets/img/Logo-Square-White.png" alt="World of SB">
 				DJ
-				<span style="color: #ff8a00">2020</span>
+				<span style="color: #ff8a00">2024</span>
 			</div>
 		</div>
 		<div class="col-xs-6 col-sm-7 col-md-7 col-lg-7">
@@ -58,12 +58,12 @@ if (isset($_POST['pwd'])) {
 	<div id="ui">
 		<div id="userInteraction">
             <form action="login.php" method="POST">
-                <input type="password" placeholder="<?=$output['password']; ?>" name="pwd">&nbsp;&nbsp;&nbsp;
-                <input type="submit" value="<?=$output['login']; ?>">
+                <input type="password" placeholder="<?=_("Password"); ?>" name="pwd">&nbsp;&nbsp;&nbsp;
+                <input type="submit" value="<?=_("Login"); ?>">
             </form>
 		</div>
 		<div id="uiContentWrap">
-            <div id="uiContent" style="background-image: url('https://source.unsplash.com/1600x900/?dj');"></div>
+            <div id="uiContent" style="background-image: url('assets/img/marcela-laskoski-YrtFlrLo2DQ-unsplash.jpg');"></div>
 			
 			</div>
 		</div>
@@ -91,7 +91,7 @@ if (isset($_POST['pwd'])) {
 
 <noscript>
 	<div id="noscript">
-		<img src="./assets/img/logo/black/Logo-Full.png" style="width: 150px"><br /><br />
+		<img src="assets/img/Logo-Full.png" style="width: 150px"><br /><br />
 		<strong>Oh no...</strong><br />
 		I need JavaScript to work.<br /><br />
 		<small>
@@ -119,15 +119,11 @@ if (isset($_POST['pwd'])) {
 	</style>
 </noscript>
 
-<script src="./assets/external/jquery/jquery-3.5.1.min.js"></script>
-<script src="./assets/external/jquery/jquery-ui.min.js"></script>
+<script src="assets/external/jquery/jquery-3.5.1.min.js"></script>
+<script src="assets/external/jquery/jquery-ui.min.js"></script>
 
 <!-- Script -->
-<script src="./assets/js/scripts.js"></script>
+<script src="assets/js/scripts.js"></script>
 
 </body>
 </html>
-
-<?php
-$db->close();
-?>
