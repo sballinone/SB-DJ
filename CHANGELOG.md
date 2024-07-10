@@ -4,13 +4,34 @@
 
 | Mayor | Minor | Build |
 | ----- | ----- | ----- |
+| 2024  | 1     | 2     |
+
+> **NEW**
+
+> **FIXES**
+>
+> -   Localization charset fix
+
+> **ENHANCEMENTS**
+>
+> -   Responsive view is now more beautiful
+> -   Footer redesigned
+
+> **NEW CLASSES**
+
+> **COMMENTS**
+
+* * *
+
+| Mayor | Minor | Build |
+| ----- | ----- | ----- |
 | 2024  | 1     | 1     |
 
 > **NEW**
 
 > **FIXES**
 >
-> -   Small bugfix removed
+> -   Small bugfixes
 
 > **ENHANCEMENTS**
 

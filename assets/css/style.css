@@ -13,7 +13,7 @@ body {
     font-weight: 300;
 	line-height: 1.5;
 	margin: 0;
-	text-align: justify;
+	text-align: left;
 }
 
 #ciHeader {
@@ -257,6 +257,11 @@ h2, h3 {
 .setlist a i {
     background-color: transparent;
     color: yellowgreen;
+}
+
+.btn,
+#btn {
+    line-height: 35px;
 }
 
 @keyframes latestwish {

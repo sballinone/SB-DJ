@@ -55,4 +55,4 @@ $export = true;
 $cookieconsent = false;
 
 // Do not change
-$release = "2024.1.1";
+$release = "2024.1.2";

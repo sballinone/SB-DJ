@@ -1,26 +1,14 @@
 <div class='row' id='footer'>
-    <div class="box">
+    <div class="box" style="text-align: left;">
 
         <?php
-
-        if ($footernav) {
-            echo "<small><a href='index.php'>FE</a> <a href='backend.php'>BE</a></small>";
-        }
-        
-        if ($credits) {
-            echo "<small><strong>SB DJ</strong> · By Saskia Brückner</small><small><a href='https://saskiabrueckner.com' target='_blank'>saskiabrueckner.com</a></small>";
-        }
-
-        if ($showrelease) {
-            echo "<small><a href='https://github.com/sballinone/SB-DJ' target='_blank'><i class='icofont-github'></i></a> v".$release."</small>";
-        }
         
         if ($showlang) {
             echo "<small>";
             $data = scandir("./lang");
 
             foreach ($data as $language) {
-                if ($language != "." && $language != "..") {
+                if ($language != "." && $language != ".." && $language != ".DS_Store") {
                     
                     $langcode = substr($language, 0, 2);
 
@@ -36,6 +24,23 @@
 
                 }
             }
+            echo "</small> ";
+        }
+
+        echo "<small>";
+
+        if ($footernav) {
+            echo "<a href='index.php'>Frontend</a> <a href='backend.php'>Backend</a> ";
+        }
+
+        if ($showrelease && isset($_SESSION['backend'])) {
+            echo "<a href='https://github.com/sballinone/SB-DJ' target='_blank'><i class='icofont-github'></i></a> v".$release;
+        }
+
+        echo "</small><br />";
+
+        if ($credits) {
+            echo "<small><strong>SB DJ</strong> · By Saskia Brückner · <a href='https://saskiabrueckner.com' target='_blank' style='border: 0; padding: 0;'>SaskiaBrueckner.com</a></small> ";
         }
         ?>
     

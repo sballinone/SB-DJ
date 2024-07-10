@@ -1,5 +1,5 @@
 <?php
-$release = "2024.1.1";
+$release = "2024.1.2";
 
 session_start();
 

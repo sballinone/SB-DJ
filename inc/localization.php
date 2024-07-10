@@ -20,4 +20,5 @@ if (!function_exists("gettext")) { echo "gettext is not installed"; exit; }
 putenv('LC_ALL='.$_SESSION['lang']);
 setlocale (LC_ALL, $_SESSION['lang']);
 bindtextdomain("sbdj", "lang");
+bind_textdomain_codeset("sbdj", 'UTF-8');
 textdomain("sbdj");
