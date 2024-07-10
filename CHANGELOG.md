@@ -4,6 +4,24 @@
 
 | Mayor | Minor | Build |
 | ----- | ----- | ----- |
+| 2024  | 1     | 1     |
+
+> **NEW**
+
+> **FIXES**
+>
+> -   Small bugfix removed
+
+> **ENHANCEMENTS**
+
+> **NEW CLASSES**
+
+> **COMMENTS**
+
+* * *
+
+| Mayor | Minor | Build |
+| ----- | ----- | ----- |
 | 2024  | 1     | 0     |
 
 > **NEW**

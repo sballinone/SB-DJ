@@ -1,5 +1,5 @@
 <?php
-$release = "2024.1.0";
+$release = "2024.1.1";
 
 session_start();
 
@@ -32,16 +32,37 @@ if (isset($_GET['do'])) {
 	$dbbase = htmlspecialchars($_POST['dbbase']);
 	$dbport = htmlspecialchars($_POST['dbport']);
 	$defaultLang = htmlspecialchars($_POST['defaultLang']);
-	$showlang = htmlspecialchars($_POST['showlang']);
-	$footernav = htmlspecialchars($_POST['footernav']);
-	$credits = htmlspecialchars($_POST['credits']);
-	$showrelease = htmlspecialchars($_POST['showrelease']);
+	
+	if(isset($_POST['showlang'])) {
+		$showlang = htmlspecialchars($_POST['showlang']); 
+	} else {
+		$showlang = false;
+	}
+	if(isset($_POST['footernav'])) {
+		$footernav = htmlspecialchars($_POST['footernav']);
+	} else {
+		$footernav = false;
+	}
+	if(isset($_POST['credits'])) {
+		$credits = htmlspecialchars($_POST['credits']);
+	} else {
+		$credits = false;
+	}
+	if(isset($_POST['showrelease'])) {
+		$showrelease = htmlspecialchars($_POST['showrelease']);
+	} else {
+		$showrelease = false;
+	}
 	if(isset($_POST['export'])) {
 		$export = htmlspecialchars($_POST['export']);
 	} else {
 		$export = false;
 	}
-	$cookieconsent = htmlspecialchars($_POST['cookieconsent']);
+	if(isset($_POST['cookieconsent'])) {
+		$cookieconsent = htmlspecialchars($_POST['cookieconsent']);
+	} else {
+		$cookieconsent = false;
+	}
 	
 	// Write config file
 	$file = fopen("config.php", "w");
