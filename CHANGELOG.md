@@ -4,6 +4,24 @@
 
 | Mayor | Minor | Build |
 | ----- | ----- | ----- |
+| 2024  | 1     | 3     |
+
+> **NEW**
+>
+> -   Autorefresh - Refresh the site automatically
+
+> **FIXES**
+
+> **ENHANCEMENTS**
+
+> **NEW CLASSES**
+
+> **COMMENTS**
+
+* * *
+
+| Mayor | Minor | Build |
+| ----- | ----- | ----- |
 | 2024  | 1     | 2     |
 
 > **NEW**

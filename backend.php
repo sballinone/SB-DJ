@@ -26,6 +26,11 @@ if ($db->connect_errno) {
     die("Sorry, I could not connect to the database. Please check your configuration. <br /><br />".$db->connect_error);
 }
 
+$refresh = false;
+if($_COOKIE['refresh'] == "true") {
+    $refresh = true;
+}
+
 require_once "inc/action.php";
 ?>
 
@@ -82,14 +87,32 @@ require_once "inc/action.php";
         <div class="box">
 
             <div class="btn">
-                <a href='backend.php' class='btnRefresh'><i class="icofont-refresh"></i>&nbsp;<small><?=_("Refresh"); ?></small></a>
+                <?php
+                echo "<a href='javascript:refreshTimerToggle()' id='btnRefreshTime' class='";
+                if($refresh) { 
+                    echo "btnRefresh'><i class='icofont-refresh'></i>&nbsp;<small><span id='refreshTime'>";
+                    echo $refreshTimer; 
+                } else { 
+                    echo "btnDanger'><i class='icofont-refresh'></i>&nbsp;<small><span id='refreshTime'>";
+                    echo _("Disabled"); 
+                }
+                echo "</span></small></a>";
+                ?>
+
                 <a href='backend.php?do=resetwishlist' class='btnDanger'><i class="icofont-ui-rate-remove"></i></a>
+                
                 <a href='backend.php?do=reset' class='btnDanger'><i class="icofont-database-remove"></i></a>
+                
                 <a href='setlist.php' class='btnDefault'><i class='icofont-disc'></i>&nbsp;<small><?=_("Setlist"); ?></small></a>
+                
                 <a href='backend.php?do=export' class='btnDefault'><i class="icofont-external-link"></i>&nbsp;<small><?=_("Export"); ?></small></a>
+                
                 <a href='backend.php?do=import' class='btnDefault'><i class="icofont-file-sql"></i>&nbsp;<small><?=_("Import"); ?></small></a>
+                
                 <a href='qrcode.php' class='btnDefault' target='_blank'><i class="icofont-qr-code"></i>&nbsp;<small><?=_("QR Flyer"); ?></small></i></a>
+                
                 <a href='setup.php' class='btnDefault'><i class="icofont-settings-alt"></i></a>
+                
                 <a href='login.php' class='btnDefault'><i class="icofont-logout"></i></a>
             </div>
 
@@ -182,8 +205,20 @@ require_once "inc/action.php";
 
 <?php 
 include("inc/footer.php"); 
-echo "</div>";
 ?>
+
+</div>
+
+<script src='assets/external/jquery/jquery-3.5.1.min.js'></script>
+<script src='assets/js/cookies.js'></script>
+<script>
+var refreshTimer = <?=$refreshTimer;?>;
+var refreshTimerActive = false;
+if(getCookie("refresh") == "true") {
+    refreshTimerActive = true;
+}
+</script>
+<script src='assets/js/autorefresh.js'></script>
 
 </body>
 </html>    

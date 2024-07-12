@@ -63,7 +63,7 @@ require_once "inc/action.php";
 			<?php } ?>
 		</div>
 		<div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
-			<?php if($footernav) { ?>
+			<?php if($footernavOnTop) { ?>
 				<div class="box logout" onclick="javascript:location.href='backend.php'">
 					<a href='backend.php'><i class="icofont-retro-music-disk"></i></a>
 				</div>

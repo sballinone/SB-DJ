@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: SB DJ 2024\n"
-"POT-Creation-Date: 2024-07-10 01:24+0200\n"
-"PO-Revision-Date: 2024-07-10 20:35+0200\n"
+"POT-Creation-Date: 2024-07-12 12:17+0200\n"
+"PO-Revision-Date: 2024-07-12 12:17+0200\n"
 "Last-Translator: \n"
 "Language-Team: Saskia Brückner\n"
 "Language: de_DE\n"
@@ -14,39 +14,39 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: assets\n"
 
-#: backend.php:85 index.php:85
-msgid "Refresh"
-msgstr "Neu laden"
+#: backend.php:97
+msgid "Disabled"
+msgstr "Nicht aktiv"
 
-#: backend.php:88 setlist.php:97
+#: backend.php:106 setlist.php:97
 msgid "Setlist"
 msgstr "Setliste"
 
-#: backend.php:89 index.php:89
+#: backend.php:108 index.php:89
 msgid "Export"
 msgstr "Export"
 
-#: backend.php:90 inc/action.php:90
+#: backend.php:110 inc/action.php:90
 msgid "Import"
 msgstr "Importieren"
 
-#: backend.php:91 setup.php:418
+#: backend.php:112 setup.php:481
 msgid "QR Flyer"
 msgstr "QR Flyer"
 
-#: backend.php:106 index.php:86 index.php:139
+#: backend.php:129 index.php:86 index.php:139
 msgid "Playlist"
 msgstr "Playlist"
 
-#: backend.php:119 backend.php:156 index.php:111 setlist.php:110
+#: backend.php:142 backend.php:179 index.php:111 setlist.php:110
 msgid "Title"
 msgstr "Titel"
 
-#: backend.php:124 backend.php:161 index.php:116 setlist.php:115
+#: backend.php:147 backend.php:184 index.php:116 setlist.php:115
 msgid "Artist"
 msgstr "Interpret"
 
-#: backend.php:148 index.php:103 setlist.php:139
+#: backend.php:171 index.php:103 setlist.php:139
 msgid "Wishlist"
 msgstr "Wunschliste"
 
@@ -198,6 +198,10 @@ msgstr "Sorry, es gab einen Fehler beim Upload."
 msgid "The file %s has been uploaded."
 msgstr "Die Datei %s wurde hochgeladen."
 
+#: index.php:85
+msgid "Refresh"
+msgstr "Neu laden"
+
 #: index.php:156
 msgid ""
 "This software uses cookies for some functionalities like voting or wishing. "
@@ -218,7 +222,7 @@ msgstr ""
 "Entschuldige, das eingegebene Passwort ist nicht korrekt.\\n\\nBitte "
 "versuche es erneut."
 
-#: login.php:61 setup.php:345 setup.php:350
+#: login.php:61 setup.php:408 setup.php:413
 msgid "Password"
 msgstr "Passwort"
 
@@ -230,11 +234,11 @@ msgstr "Login"
 msgid "Back"
 msgstr "Zurück"
 
-#: setup.php:101
+#: setup.php:135
 msgid "Settings saved"
 msgstr "Konfiguration gespeichert"
 
-#: setup.php:108
+#: setup.php:142
 msgid ""
 "Hi! Nice to see you. You will be amazed. Configure your database and event "
 "settings and you're ready to go. Enjoy SB DJ."
@@ -243,78 +247,86 @@ msgstr ""
 "deine Datenbank und Event-Einstellungen und du bist bereit loszulegen. Enjoy "
 "SB DJ."
 
-#: setup.php:194
+#: setup.php:230
 msgid "Save configuration"
 msgstr "Speichere Konfiguration"
 
-#: setup.php:198
+#: setup.php:234
 msgid "DB status"
 msgstr "DB Status"
 
-#: setup.php:215
+#: setup.php:251
 msgid "Global settings"
 msgstr "Globale Einstellungen"
 
-#: setup.php:221 setup.php:226
+#: setup.php:257 setup.php:262
 msgid "MySQL Host"
 msgstr "MySQL Host"
 
-#: setup.php:233 setup.php:238
+#: setup.php:269 setup.php:274
 msgid "MySQL Database"
 msgstr "MySQL Datenbank"
 
-#: setup.php:245 setup.php:250
+#: setup.php:281 setup.php:286
 msgid "MySQL User"
 msgstr "MySQL Benutzer"
 
-#: setup.php:257 setup.php:262
+#: setup.php:293 setup.php:298
 msgid "MySQL Password"
 msgstr "MySQL Passwort"
 
-#: setup.php:269 setup.php:274
+#: setup.php:305 setup.php:310
 msgid "MySQL Port"
 msgstr "MySQL Port"
 
-#: setup.php:284
+#: setup.php:320
+msgid "Autorefresh in seconds"
+msgstr "Autorefresh in Sekunden"
+
+#: setup.php:335
 msgid "Show shortcuts for DJ"
 msgstr "Zeige DJ Shortcuts"
 
-#: setup.php:296
+#: setup.php:347
+msgid "Show DJ shortcuts in main navigation"
+msgstr "Zeige DJ Shortcuts in der Hauptnavigation"
+
+#: setup.php:359
 msgid "Support me and view credits"
 msgstr "Unterstütze mich und aktiviere Credits"
 
-#: setup.php:308
+#: setup.php:371
 msgid "Show the software release"
 msgstr "Zeige die Softwareversion"
 
-#: setup.php:324
+#: setup.php:387
 msgid "Event"
 msgstr "Event"
 
-#: setup.php:330 setup.php:335
+#: setup.php:393 setup.php:398
 msgid "Event title"
 msgstr "Titel des Events"
 
-#: setup.php:360 setup.php:365
+#: setup.php:423 setup.php:428
 msgid "Default language"
 msgstr "Standardsprache"
 
-#: setup.php:372
+#: setup.php:435
 msgid "Show language selector"
 msgstr "Zeige Sprachauswahl"
 
-#: setup.php:387
+#: setup.php:450
 msgid "Allow playlist export"
 msgstr "Aktiviere Playlist-Export"
 
-#: setup.php:402
+#: setup.php:465
 msgid "Show EU Cookie Consent"
 msgstr "Zeige EU Cookie-Banner"
 
-#: setup.php:424 setup.php:429
+#: setup.php:487 setup.php:492
 msgid "Text on QR Flyer"
 msgstr "Text auf QR Flyer"
 
-#: setup.php:436 setup.php:441
+#: setup.php:499 setup.php:504
 msgid "QR Code in px"
 msgstr "QR Code in Px"

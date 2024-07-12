@@ -32,6 +32,9 @@ $qrtext .= "Gleich scannen und dabei sein</p>";
 // Size of QR Code
 $qrcodesize = 100;
 
+// Autorefresh timer
+$refreshTimer = 15;
+
 // Database configuration
 $dbhost = "localhost";
 $dbuser = "sbdj";
@@ -45,6 +48,7 @@ $showlang = true;
 
 // Footer configuration
 $footernav = true;
+$footernavOnTop = true;
 $credits = true;
 $showrelease = false; // helpful for debugging
 
@@ -55,4 +59,4 @@ $export = true;
 $cookieconsent = false;
 
 // Do not change
-$release = "2024.1.2";
+$release = "2024.1.3"; // Please update the configuration once after each update

@@ -1,5 +1,5 @@
 <?php
-$release = "2024.1.2";
+$release = "2024.1.3";
 
 session_start();
 
@@ -26,6 +26,7 @@ if (isset($_GET['do'])) {
 	$event = htmlspecialchars($_POST['event']);
 	$qrtext = strip_tags($_POST['qrtext'], "<h3></h3><br><br /><p></p>");
 	$qrcodesize = htmlspecialchars($_POST['qrcodesize']);
+	$refreshTimer = htmlspecialchars($_POST['refreshTimer']);
 	$dbhost = htmlspecialchars($_POST['dbhost']);
 	$dbuser = htmlspecialchars($_POST['dbuser']);
 	$dbpass = htmlspecialchars($_POST['dbpass']);
@@ -42,6 +43,11 @@ if (isset($_GET['do'])) {
 		$footernav = htmlspecialchars($_POST['footernav']);
 	} else {
 		$footernav = false;
+	}
+	if(isset($_POST['footernavOnTop'])) {
+		$footernavOnTop = htmlspecialchars($_POST['footernavOnTop']);
+	} else {
+		$footernavOnTop = false;
 	}
 	if(isset($_POST['credits'])) {
 		$credits = htmlspecialchars($_POST['credits']);
@@ -73,6 +79,7 @@ if (isset($_GET['do'])) {
 	fwrite($file, "\$event = '".$event."';".PHP_EOL);
 	fwrite($file, "\$qrtext = '".$qrtext."';".PHP_EOL);
 	fwrite($file, "\$qrcodesize = ".$qrcodesize.";".PHP_EOL);
+	fwrite($file, "\$refreshTimer = ".$refreshTimer.";".PHP_EOL);
 	fwrite($file, "\$dbhost = '".$dbhost."';".PHP_EOL);
 	fwrite($file, "\$dbuser = '".$dbuser."';".PHP_EOL);
 	fwrite($file, "\$dbpass = '".$dbpass."';".PHP_EOL);
@@ -90,6 +97,12 @@ if (isset($_GET['do'])) {
 		fwrite($file, "\$footernav = true;".PHP_EOL);
 	} else {
 		fwrite($file, "\$footernav = false;".PHP_EOL);
+	}
+		
+	if ($footernavOnTop == "on") {
+		fwrite($file, "\$footernavOnTop = true;".PHP_EOL);
+	} else {
+		fwrite($file, "\$footernavOnTop = false;".PHP_EOL);
 	}
 
 	if ($credits == "on") {
@@ -133,6 +146,7 @@ if (!file_exists("config.php")) {
 	$event = 'SB DJ';
 	$qrtext = '<h3>Playlist?<br />Wishlist?</h3><p>Scan now and jump into the new world of entertainment.</p>';
 	$qrcodesize = 100;
+	$refreshTimer = 15;
 	$dbhost = 'localhost';
 	$dbuser = '';
 	$dbpass = '';
@@ -141,6 +155,7 @@ if (!file_exists("config.php")) {
 	$defaultLang = 'en_US';
 	$showlang = true;
 	$footernav = true;
+	$footernavOnTop = true;
 	$credits = true;
 	$showrelease = true;
 	$export = true;
@@ -302,6 +317,21 @@ if (!file_exists("config.php")) {
 						<div class="row">
 							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 								<div class="box">
+									<?=_("Autorefresh in seconds"); ?>
+								</div>
+							</div>
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								<div class="box">
+									<input type="number" min="5" max="120" step="5" value="<?=$refreshTimer; ?>" placeholder="15" name="refreshTimer">
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="item">
+						<div class="row">
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								<div class="box">
 									<?=_("Show shortcuts for DJ"); ?>
 								</div>
 							</div>
@@ -311,6 +341,21 @@ if (!file_exists("config.php")) {
 								</div>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								<div class="box">
+									<?=_("Show DJ shortcuts in main navigation"); ?>
+								</div>
+							</div>
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								<div class="box">
+									<input type="checkbox" class="checkbox" name="footernavOnTop" <?php if ($footernavOnTop) { echo "checked"; } ?>>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="item">
 						<div class="row">
 							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 								<div class="box" style="text-align: left;">
@@ -323,6 +368,9 @@ if (!file_exists("config.php")) {
 								</div>
 							</div>
 						</div>
+					</div>
+
+					<div class="item">
 						<div class="row">
 							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 								<div class="box" style="text-align: left;">

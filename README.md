@@ -22,12 +22,6 @@ DJ Compagnon app
 
 * * *
 
-## 2020.2 OUTVIEW
-
-Let's create your personal DJ profile. Import your djay session list and share it within the DJ community. Manage your setlists.
-
-* * *
-
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md)
@@ -75,8 +69,8 @@ _Please note: There is always the latest release of SB DJ hosted within the repo
 ### Quick Start
 
 -   Run SB DJ by opening the application in your webbrowser. 
--   If you have enabled shortcuts, you find the buttons "FE" (Frontend) and "BE" (Backend) on the bottom. Press "BE" to enter the DJ interface of the software (Default setting).
--   If you have disabled shortcuts and cannot see the BE button, open backend.php to view the backend.
+-   If you have enabled shortcuts, you find the buttons "Frontend" and "Backend" on the bottom.
+-   If you have disabled shortcuts and cannot see the Backend button, open backend.php to view the backend.
 
 ## Timezone
 
